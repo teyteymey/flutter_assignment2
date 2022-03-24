@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: EdgeInsets.all(90.0),
               child: Image(
-                image: AssetImage("images/appvocado-loading.jpeg"),
+                image: AssetImage("images/appvocado-loading.png"),
               ),
             ),
           ],
