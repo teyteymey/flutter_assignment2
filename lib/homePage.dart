@@ -39,14 +39,24 @@ class Offer extends StatelessWidget {
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-        child: ListTile(
-          leading: Image.network(image),
-          title: Text(title,
-              style: const TextStyle(
-                fontFamily: 'JosefinSans',
-                fontWeight: FontWeight.w900,
-                fontSize: 20.0,
-              )),
+        child: Column(
+          children: [
+            Image.network(image),
+            ListTile(
+              title: Text(title,
+                  style: const TextStyle(
+                    fontFamily: 'JosefinSans',
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20.0,
+                  )),
+              subtitle: Text(distance + "       Best before: " + best_before,
+                  style: const TextStyle(
+                    fontFamily: 'JosefinSans',
+                    fontWeight: FontWeight.normal,
+                    fontSize: 15.0,
+                  )),
+            ),
+          ],
         ),
       ),
     );
