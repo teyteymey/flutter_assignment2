@@ -55,7 +55,7 @@ class Offer extends StatelessWidget {
                   style: const TextStyle(
                     fontFamily: 'JosefinSans',
                     fontWeight: FontWeight.normal,
-                    fontSize: 15.0,
+                    fontSize: 14.0,
                   )),
             ),
           ],
@@ -74,11 +74,14 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      //backgroundColor: const Color(0xFFE5E5E5),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[for (var i in globals.list) Offer(i)],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        //backgroundColor: const Color(0xFFE5E5E5),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[for (var i in globals.list) Offer(i)],
+        ),
       ),
     );
   }
