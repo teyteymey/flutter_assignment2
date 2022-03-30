@@ -41,7 +41,9 @@ class Offer extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Column(
           children: [
-            Image.network(image),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.network(image)),
             ListTile(
               title: Text(title,
                   style: const TextStyle(
