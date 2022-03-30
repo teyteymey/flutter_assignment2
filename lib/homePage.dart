@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'globalVar.dart' as globals;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -7,8 +8,49 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-Widget productContainer() {
-  return Card();
+// Returns all the objects offered in a certain area formatted as cards
+class Offer extends StatelessWidget {
+  String title = "default";
+  String best_before = "default";
+  String distance = "default";
+  List<String> offerDetails = [];
+  //default image
+  String image = "default";
+
+  Offer(List<String> offerDetails) {
+    offerDetails = offerDetails;
+    title = offerDetails.elementAt(3);
+    best_before = offerDetails.elementAt(7);
+    distance = "1.5 km"; // todo
+    image = offerDetails.elementAt(5);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        //todo
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => ),
+        // );
+      },
+      child: Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        child: ListTile(
+          leading: Image.network(image),
+          title: Text(title,
+              style: const TextStyle(
+                fontFamily: 'JosefinSans',
+                fontWeight: FontWeight.w900,
+                fontSize: 20.0,
+              )),
+        ),
+      ),
+    );
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -22,15 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       //backgroundColor: const Color(0xFFE5E5E5),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Padding(padding: EdgeInsets.all(90.0), child: Text("second page")),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[for (var i in globals.list) Offer(i)],
       ),
     );
   }
