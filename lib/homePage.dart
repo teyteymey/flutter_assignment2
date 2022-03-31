@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'globalVar.dart' as globals;
 
@@ -17,7 +19,7 @@ class Offer extends StatelessWidget {
   //default image
   String image = "default";
 
-  // constructor method
+  // constructor method, sets all the attributes
   Offer(List<String> offerDetails) {
     offerDetails = offerDetails;
     title = offerDetails.elementAt(3);
@@ -27,6 +29,7 @@ class Offer extends StatelessWidget {
   }
 
   @override
+  // the container of a card: it is a text button showing image, distance and best before date
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
@@ -44,7 +47,9 @@ class Offer extends StatelessWidget {
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: Image.network(image)),
+                child: Image.network(
+                  image,
+                )),
             ListTile(
               title: Text(title,
                   style: const TextStyle(
@@ -87,9 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: const Color(0xFFF4F2DD),
         ),
         //backgroundColor: const Color(0xFFF4F2DD),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[for (var i in globals.list) Offer(i)],
+        body: SingleChildScrollView(
+          // to avoid overfloww
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              for (var i in globals.list) Offer(i)
+            ], // for each offer, we create and display a card
+          ),
         ),
         bottomNavigationBar: BottomAppBar(
           child: Row(
