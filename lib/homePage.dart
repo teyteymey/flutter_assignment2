@@ -17,6 +17,7 @@ class Offer extends StatelessWidget {
   //default image
   String image = "default";
 
+  // constructor method
   Offer(List<String> offerDetails) {
     offerDetails = offerDetails;
     title = offerDetails.elementAt(3);
@@ -77,10 +78,42 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        //backgroundColor: const Color(0xFFE5E5E5),
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'Offers near you',
+            textAlign: TextAlign.center,
+          ),
+          backgroundColor: const Color(0xFFF4F2DD),
+        ),
+        //backgroundColor: const Color(0xFFF4F2DD),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[for (var i in globals.list) Offer(i)],
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: IconButton(
+                icon: Icon(Icons.travel_explore),
+                onPressed: () {},
+              )),
+              Expanded(
+                  child:
+                      IconButton(icon: Icon(Icons.favorite), onPressed: () {})),
+              Expanded(
+                child: IconButton(
+                    icon: Icon(Icons.shopping_cart_outlined), onPressed: () {}),
+              ),
+              Expanded(
+                  child: IconButton(icon: Icon(Icons.mail), onPressed: () {})),
+              Expanded(
+                  child:
+                      IconButton(icon: Icon(Icons.person), onPressed: () {})),
+            ],
+          ),
         ),
       ),
     );
