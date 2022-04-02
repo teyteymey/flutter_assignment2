@@ -46,6 +46,10 @@ class _offerDetails extends State<offerDetails> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(FontAwesome.angle_left),
+            onPressed: () => Navigator.pop(context, false),
+          ), // different arroy style to fit with the prototype
           title: const Text(
             'Back',
             textAlign: TextAlign.center,
