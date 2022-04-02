@@ -47,14 +47,14 @@ class _offerDetails extends State<offerDetails> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(FontAwesome.angle_left),
+            icon: const Icon(FontAwesome.angle_left),
             onPressed: () => Navigator.pop(context, false),
           ), // different arroy style to fit with the prototype
           title: const Text(
             'Back',
             textAlign: TextAlign.center,
           ),
-          backgroundColor: const Color.fromARGB(21, 124, 124, 117),
+          backgroundColor: const Color(0xFFF4F2DD),
         ),
         //backgroundColor: const Color(0xFFF4F2DD),
         body: SingleChildScrollView(
@@ -65,10 +65,12 @@ class _offerDetails extends State<offerDetails> {
                 CrossAxisAlignment.start, // so the text starts at the left
             children: <Widget>[
               Image.network(
+                //image
                 //first we load the image
                 image,
               ),
               Padding(
+                // title
                 //some space between the image and the title
                 padding: const EdgeInsets.all(15.0),
                 child: Text(title,
@@ -80,6 +82,7 @@ class _offerDetails extends State<offerDetails> {
                     )),
               ),
               Padding(
+                // location
                 padding: const EdgeInsets.only(left: 15.0),
                 child: Row(
                   children: [
@@ -99,6 +102,7 @@ class _offerDetails extends State<offerDetails> {
                 ),
               ),
               Padding(
+                // date best before
                 padding: const EdgeInsets.only(left: 15.0, top: 7),
                 child: Row(
                   children: [
@@ -118,10 +122,20 @@ class _offerDetails extends State<offerDetails> {
                 ),
               ),
               const Padding(
+                //divider
                 // divider of the text (grey line)
-                padding: EdgeInsets.only(top: 8.0, left: 15, right: 15),
+                padding:
+                    EdgeInsets.only(top: 8.0, left: 15, right: 15, bottom: 8.0),
                 child: Divider(
                   thickness: 1.5,
+                ),
+              ),
+              Padding(
+                //description of the product
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Text(
+                  description,
+                  textAlign: TextAlign.justify,
                 ),
               )
             ],
