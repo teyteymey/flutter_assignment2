@@ -47,6 +47,7 @@ class _offerDetails extends State<offerDetails> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
           child: SizedBox(
@@ -54,13 +55,13 @@ class _offerDetails extends State<offerDetails> {
             child: TextButton(
               style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xFF7F9946)),
+                      MaterialStateProperty.all<Color>(const Color(0xFF7F9946)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ))),
               onPressed: () => reserve(),
-              child: Text(
+              child: const Text(
                 "Reserve",
                 style: TextStyle(color: Colors.white),
               ),
@@ -76,16 +77,17 @@ class _offerDetails extends State<offerDetails> {
             'Back',
             textAlign: TextAlign.center,
           ),
-          backgroundColor: const Color(0xFFF4F2DD),
+          backgroundColor: Color.fromARGB(112, 244, 242, 221),
         ),
         //backgroundColor: const Color(0xFFF4F2DD),
         body: SingleChildScrollView(
           // to avoid overfloww
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            //mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment:
                 CrossAxisAlignment.start, // so the text starts at the left
             children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 38)),
               Image.network(
                 //image
                 //first we load the image
