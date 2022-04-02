@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/offerDetails.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 import 'globalVar.dart' as globals;
 import 'offerDetails.dart';
 import 'offerDetails.dart';
@@ -117,8 +118,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   child:
                       IconButton(icon: Icon(Icons.favorite), onPressed: () {})),
               Expanded(
-                child: IconButton(
-                    icon: Icon(Icons.shopping_cart_outlined), onPressed: () {}),
+                child:
+                    IconButton(icon: Icon(FontAwesome.food), onPressed: () {}),
               ),
               Expanded(
                   child: IconButton(icon: Icon(Icons.mail), onPressed: () {})),
