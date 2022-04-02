@@ -39,7 +39,38 @@ class _offerDetails extends State<offerDetails> {
     description = offerDetailsList.elementAt(4);
   }
 
-  void reserve() {}
+  void reserve() {
+    //todo -> call to backend
+    _showMyDialog();
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('This is a demo alert dialog.'),
+                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Approve'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   //displays all the information of the offer
   @override
@@ -51,14 +82,15 @@ class _offerDetails extends State<offerDetails> {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
           child: SizedBox(
-            height: 50,
+            height: 50, //make the button bigger
             child: TextButton(
               style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(const Color(0xFF7F9946)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(
+                        10.0), //rounded corners of the button
                   ))),
               onPressed: () => reserve(),
               child: const Text(
