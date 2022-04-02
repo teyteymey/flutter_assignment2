@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'globalVar.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:flutter/cupertino.dart';
 
 class offerDetails extends StatefulWidget {
   List<String> offerDetailsList = [];
@@ -41,10 +42,11 @@ class _offerDetails extends State<offerDetails> {
 
   void reserve() {
     //todo -> call to backend
-    _showMyDialog();
+    _showReservationConfirmationDialog();
   }
 
-  Future<void> _showMyDialog() async {
+  // shows the reservation confirmation
+  Future<void> _showReservationConfirmationDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -52,7 +54,7 @@ class _offerDetails extends State<offerDetails> {
         return AlertDialog(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0)), //make alert rounded
-          backgroundColor: Color.fromARGB(237, 244, 242, 221),
+          backgroundColor: const Color.fromARGB(237, 244, 242, 221),
           title: const Text(
             'Reserve the item',
           ),
@@ -79,12 +81,53 @@ class _offerDetails extends State<offerDetails> {
               ),
               onPressed: () {
                 Navigator.of(context).pop();
+                _showAnimationOfReservationDialog();
               },
             ),
           ],
         );
       },
     );
+  }
+
+  // shows that the reservation has succesfully happened
+  Future<void> _showAnimationOfReservationDialog() async {
+    Timer _timer;
+    _timer = Timer(Duration(seconds: 1), () {
+      //to autoclose the dialog
+      Navigator.of(context).pop();
+    });
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+          backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+          content: SingleChildScrollView(
+            child: Column(
+              children: const [
+                Icon(CupertinoIcons.gift, size: 150, color: Colors.grey),
+                Text(
+                  "Reserved",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    ).then((val) {
+      if (_timer.isActive) {
+        _timer.cancel();
+      }
+    });
+    ;
   }
 
   //displays all the information of the offer
@@ -124,7 +167,7 @@ class _offerDetails extends State<offerDetails> {
             'Back',
             textAlign: TextAlign.center,
           ),
-          backgroundColor: Color.fromARGB(112, 244, 242, 221),
+          backgroundColor: const Color.fromARGB(112, 244, 242, 221),
         ),
         //backgroundColor: const Color(0xFFF4F2DD),
         body: SingleChildScrollView(
@@ -134,7 +177,7 @@ class _offerDetails extends State<offerDetails> {
             crossAxisAlignment:
                 CrossAxisAlignment.start, // so the text starts at the left
             children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 38)),
+              const Padding(padding: EdgeInsets.only(top: 38)),
               Image.network(
                 //image
                 //first we load the image
