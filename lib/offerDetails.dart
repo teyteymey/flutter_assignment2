@@ -27,6 +27,7 @@ class _offerDetails extends State<offerDetails> {
   String image = "default";
   String city = "default"; //todo
   String description = "default";
+  bool reserved = false; //default
 
   // BUILDER METHOD
   // we set the attributes of the offer
@@ -38,12 +39,22 @@ class _offerDetails extends State<offerDetails> {
     this.city = "Deventer"; //todo
     image = offerDetailsList.elementAt(5);
     description = offerDetailsList.elementAt(4);
+    reserved = true; //default
+    checkIfReserved(); //todo: check if reserved or not
   }
 
+  //todo
   void reserve() {
     //todo -> call to backend
     _showReservationConfirmationDialog();
   }
+
+  //todo
+  void cancelReservation() {}
+
+  //todo: need to check if this item is already reserved by the active user to
+  //show the corresponding navigation bar (reserve or cancel reservation)
+  void checkIfReserved() {}
 
   // shows the reservation confirmation
   Future<void> _showReservationConfirmationDialog() async {
@@ -96,6 +107,7 @@ class _offerDetails extends State<offerDetails> {
     _timer = Timer(Duration(seconds: 1), () {
       //to autoclose the dialog
       Navigator.of(context).pop();
+      // todo: recharge page so the navigation bar changes to cancel reservation
     });
 
     return showDialog<void>(
@@ -130,6 +142,64 @@ class _offerDetails extends State<offerDetails> {
     ;
   }
 
+  // depending on if the user already reserved this element, we need to show a different option in the navigation bar
+  Widget _NavBar() {
+    if (!reserved) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
+        child: SizedBox(
+          height: 50, //make the button bigger
+          child: TextButton(
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0xFF7F9946)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                      10.0), //rounded corners of the button
+                ))),
+            onPressed: () => {
+              reserve(),
+              setState(() {
+                reserved = true;
+              })
+            },
+            child: const Text(
+              "Reserve",
+              style: TextStyle(color: Colors.white, fontSize: 17),
+            ),
+          ),
+        ),
+      );
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
+      child: SizedBox(
+        height: 50, //make the button bigger
+        child: TextButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  Color.fromARGB(255, 245, 52, 35)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(10.0), //rounded corners of the button
+              ))),
+          onPressed: () => {
+            cancelReservation(),
+            setState(() {
+              reserved = false;
+            })
+          },
+          child: const Text(
+            "Cancel reservation",
+            style: TextStyle(color: Colors.white, fontSize: 17),
+          ),
+        ),
+      ),
+    );
+  }
+
   //displays all the information of the offer
   @override
   Widget build(BuildContext context) {
@@ -137,27 +207,7 @@ class _offerDetails extends State<offerDetails> {
       onWillPop: () async => false,
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
-          child: SizedBox(
-            height: 50, //make the button bigger
-            child: TextButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(const Color(0xFF7F9946)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        10.0), //rounded corners of the button
-                  ))),
-              onPressed: () => reserve(),
-              child: const Text(
-                "Reserve",
-                style: TextStyle(color: Colors.white, fontSize: 17),
-              ),
-            ),
-          ),
-        ),
+        bottomNavigationBar: _NavBar(),
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(FontAwesome.angle_left),
