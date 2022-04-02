@@ -109,6 +109,9 @@ class _offerDetails extends State<offerDetails> {
       Navigator.of(context).pop();
       // todo: recharge page so the navigation bar changes to cancel reservation
     });
+    setState(() {
+      reserved = true;
+    });
 
     return showDialog<void>(
       context: context,
@@ -139,7 +142,6 @@ class _offerDetails extends State<offerDetails> {
         _timer.cancel();
       }
     });
-    ;
   }
 
   // depending on if the user already reserved this element, we need to show a different option in the navigation bar
@@ -160,9 +162,6 @@ class _offerDetails extends State<offerDetails> {
                 ))),
             onPressed: () => {
               reserve(),
-              setState(() {
-                reserved = true;
-              })
             },
             child: const Text(
               "Reserve",
