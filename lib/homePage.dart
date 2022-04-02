@@ -111,21 +111,22 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Expanded(
                   child: IconButton(
-                icon: Icon(Icons.travel_explore),
+                icon: const Icon(Icons.travel_explore),
                 onPressed: () {},
               )),
               Expanded(
-                  child:
-                      IconButton(icon: Icon(Icons.favorite), onPressed: () {})),
+                  child: IconButton(
+                      icon: const Icon(Icons.favorite), onPressed: () {})),
               Expanded(
-                child:
-                    IconButton(icon: Icon(FontAwesome.food), onPressed: () {}),
+                child: IconButton(
+                    icon: const Icon(FontAwesome.food), onPressed: () {}),
               ),
               Expanded(
-                  child: IconButton(icon: Icon(Icons.mail), onPressed: () {})),
+                  child: IconButton(
+                      icon: const Icon(Icons.mail), onPressed: () {})),
               Expanded(
-                  child:
-                      IconButton(icon: Icon(Icons.person), onPressed: () {})),
+                  child: IconButton(
+                      icon: const Icon(Icons.person), onPressed: () {})),
             ],
           ),
         ),

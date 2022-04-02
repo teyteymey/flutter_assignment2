@@ -39,12 +39,34 @@ class _offerDetails extends State<offerDetails> {
     description = offerDetailsList.elementAt(4);
   }
 
+  void reserve() {}
+
   //displays all the information of the offer
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
+          child: SizedBox(
+            height: 50,
+            child: TextButton(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xFF7F9946)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ))),
+              onPressed: () => reserve(),
+              child: Text(
+                "Reserve",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(FontAwesome.angle_left),
