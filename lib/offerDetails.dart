@@ -39,7 +39,7 @@ class _offerDetails extends State<offerDetails> {
     this.city = "Deventer"; //todo
     image = offerDetailsList.elementAt(5);
     description = offerDetailsList.elementAt(4);
-    reserved = true; //default
+    reserved = false; //default
     checkIfReserved(); //todo: check if reserved or not
   }
 
