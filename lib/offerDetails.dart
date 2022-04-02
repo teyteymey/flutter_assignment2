@@ -50,18 +50,33 @@ class _offerDetails extends State<offerDetails> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('AlertDialog Title'),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+          backgroundColor: Color.fromARGB(237, 244, 242, 221),
+          title: const Text(
+            'Reserve the item',
+          ),
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
+                Text(
+                    'You will recieve a notification if your reservation is accepted.'),
+                Text('Reserve?'),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Approve'),
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'Approve',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -95,7 +110,7 @@ class _offerDetails extends State<offerDetails> {
               onPressed: () => reserve(),
               child: const Text(
                 "Reserve",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontSize: 17),
               ),
             ),
           ),
