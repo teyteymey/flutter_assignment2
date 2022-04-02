@@ -1,7 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment2/offerDetails.dart';
 import 'globalVar.dart' as globals;
+import 'offerDetails.dart';
+import 'offerDetails.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -13,19 +16,20 @@ class MyHomePage extends StatefulWidget {
 // Returns all the objects offered in a certain area formatted as cards
 class Offer extends StatelessWidget {
   String title = "default";
+  // ignore: non_constant_identifier_names
   String best_before = "default";
   String distance = "default";
-  List<String> offerDetails = [];
+  List<String> offerDetailsList = [];
   //default image
   String image = "default";
 
   // constructor method, sets all the attributes
-  Offer(List<String> offerDetails) {
-    offerDetails = offerDetails;
-    title = offerDetails.elementAt(3);
-    best_before = offerDetails.elementAt(7);
+  Offer(List<String> offerDetailsList) {
+    this.offerDetailsList = offerDetailsList;
+    title = offerDetailsList.elementAt(3);
+    best_before = offerDetailsList.elementAt(7);
     distance = "1.5 km"; // todo
-    image = offerDetails.elementAt(5);
+    image = offerDetailsList.elementAt(5);
   }
 
   @override
@@ -33,12 +37,11 @@ class Offer extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        //todo
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => offerDetails(offerDetailsList)),
+        );
       },
       child: Card(
         shape:
