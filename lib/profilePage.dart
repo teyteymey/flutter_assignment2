@@ -20,10 +20,36 @@ class profilePage extends StatefulWidget {
 class _profilePage extends State<profilePage> {
   //Atributes
   Map<String, dynamic> userDetails = {};
-  String image = "";
+  List<Map<String, dynamic>> friends = [];
   _profilePage(Map<String, dynamic> userDetails) {
     this.userDetails = userDetails; //todo: implement call to api
-    image = userDetails["picture"];
+    this.friends = globals.friends; //todo: implement call to api
+  }
+
+  Widget friendsCard(Map<String, dynamic> userDetails) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      child: Row(
+        children: [
+          CircleAvatar(
+              radius: 35,
+              backgroundImage: NetworkImage(
+                userDetails["picture"],
+              )),
+          Padding(
+              padding:
+                  EdgeInsets.only(left: 35)), //space between picture and name
+          Column(
+            children: [
+              Text(
+                userDetails["name"],
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -41,7 +67,8 @@ class _profilePage extends State<profilePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                        MaterialPageRoute(
+                            builder: (context) => const MyHomePage()),
                       );
                     },
                   )),
@@ -71,8 +98,57 @@ class _profilePage extends State<profilePage> {
               backgroundColor: const Color(0xFFF4F2DD),
             ),
             body: SingleChildScrollView(
-              child: Column(
-                children: [Image.network(image)],
+              child: Center(
+                child: Column(
+                  children: [
+                    const Padding(
+                        padding: EdgeInsets.only(top: 40)), //space from the top
+                    CircleAvatar(
+                      radius: 100,
+                      backgroundImage: NetworkImage(userDetails["picture"]),
+                    ),
+                    const Padding(padding: const EdgeInsets.only(top: 10)),
+                    Text(
+                      userDetails["name"], //name of user
+                      style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          FontAwesome.map_pin,
+                          size: 15,
+                        ),
+                        Text(
+                          userDetails["location"], //location of user
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 45)),
+                    Row(
+                      // friends list
+                      children: const [
+                        Padding(padding: EdgeInsets.only(left: 25)),
+                        Text(
+                          "Friends",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 100, 100, 100),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 10)),
+                    for (var i in friends) friendsCard(i)
+                  ],
+                ),
               ),
             )));
   }

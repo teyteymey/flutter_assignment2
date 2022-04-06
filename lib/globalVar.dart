@@ -9,6 +9,29 @@ final Map<String, dynamic> users = {
       "https://cdn.21buttons.com/users/451666d448e84b4b8cb6b1de5031d06b.large.jpg"
 };
 
+final List<Map<String, dynamic>> friends = [
+  {
+    "id": "1",
+    "email": "def@gmail",
+    "username": "default",
+    "password": "defualt",
+    "name": "Max",
+    "location": "Deventer",
+    "picture":
+        "https://media-exp1.licdn.com/dms/image/C4E03AQFNGTHPmKwtpg/profile-displayphoto-shrink_200_200/0/1636835948163?e=1652313600&v=beta&t=tKw-Eu_L_Y-zP5XpFuAAujKUCkNgQ_pof41Ch6DYXuU"
+  },
+  {
+    "id": "1",
+    "email": "def@gmail",
+    "username": "default",
+    "password": "defualt",
+    "name": "Rachel",
+    "location": "NY",
+    "picture":
+        "https://akns-images.eonline.com/eol_images/Entire_Site/2019031/rs_600x600-190131112337-600-rachel-friends.jpg?fit=around%7C1200:1200&output-quality=90&crop=1200:1200;center,top"
+  }
+];
+
 List<List<String>> list = [
   [
     "1", //0
