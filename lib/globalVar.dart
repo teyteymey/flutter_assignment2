@@ -1,3 +1,14 @@
+final Map<String, dynamic> users = {
+  "id": "1",
+  "email": "def@gmail",
+  "username": "default",
+  "password": "defualt",
+  "name": "Tatiana",
+  "location": "Deventer",
+  "picture":
+      "https://cdn.21buttons.com/users/451666d448e84b4b8cb6b1de5031d06b.large.jpg"
+};
+
 List<List<String>> list = [
   [
     "1", //0

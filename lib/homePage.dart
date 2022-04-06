@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/offerDetails.dart';
+import 'package:flutter_assignment2/profilePage.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'globalVar.dart' as globals;
 import 'offerDetails.dart';
@@ -88,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: true,
           title: const Text(
             'Offers near you',
@@ -126,7 +128,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: const Icon(Icons.mail), onPressed: () {})),
               Expanded(
                   child: IconButton(
-                      icon: const Icon(Icons.person), onPressed: () {})),
+                      icon: const Icon(Icons.person),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => profilePage(globals.users)),
+                        );
+                      })),
             ],
           ),
         ),
