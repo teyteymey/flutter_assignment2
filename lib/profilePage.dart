@@ -8,12 +8,10 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
 
 class profilePage extends StatefulWidget {
-  Map<String, dynamic> userDetails = {};
-
-  profilePage(this.userDetails, {Key? key}) : super(key: key);
+  profilePage({Key? key}) : super(key: key);
 
   @override
-  State<profilePage> createState() => _profilePage(userDetails);
+  State<profilePage> createState() => _profilePage();
 }
 
 // this class builds the details of a certain offer
@@ -21,8 +19,10 @@ class _profilePage extends State<profilePage> {
   //Atributes
   Map<String, dynamic> userDetails = {};
   List<Map<String, dynamic>> friends = [];
-  _profilePage(Map<String, dynamic> userDetails) {
-    this.userDetails = userDetails; //todo: implement call to api
+
+  // Constructor method
+  _profilePage() {
+    this.userDetails = globals.users; //todo: implement call to api
     this.friends = globals.friends; //todo: implement call to api
   }
 

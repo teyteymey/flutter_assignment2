@@ -7,18 +7,18 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
 
 class offerDetails extends StatefulWidget {
-  List<String> offerDetailsList = [];
+  Map<String, dynamic> offerDetailsMap = {};
 
-  offerDetails(this.offerDetailsList, {Key? key}) : super(key: key);
+  offerDetails(this.offerDetailsMap, {Key? key}) : super(key: key);
 
   @override
-  State<offerDetails> createState() => _offerDetails(offerDetailsList);
+  State<offerDetails> createState() => _offerDetails(offerDetailsMap);
 }
 
 // this class builds the details of a certain offer
 class _offerDetails extends State<offerDetails> {
   // ATTRIBUTES
-  List<String> offerDetailsList = [];
+  Map<String, dynamic> offerDetails = {};
   String title = "default";
   // ignore: non_constant_identifier_names
   String best_before = "default";
@@ -31,14 +31,14 @@ class _offerDetails extends State<offerDetails> {
 
   // BUILDER METHOD
   // we set the attributes of the offer
-  _offerDetails(List<String> offerDetailsList) {
-    this.offerDetailsList = offerDetailsList;
-    title = offerDetailsList.elementAt(3);
-    best_before = offerDetailsList.elementAt(7);
+  _offerDetails(Map<String, dynamic> offerDetails) {
+    this.offerDetails = offerDetails;
+    title = offerDetails["title"];
+    best_before = offerDetails["end_date"];
     distance = "1.5 km"; // todo
     this.city = "Deventer"; //todo
-    image = offerDetailsList.elementAt(5);
-    description = offerDetailsList.elementAt(4);
+    image = offerDetails["image"];
+    description = offerDetails["description"];
     reserved = false; //default
     checkIfReserved(); //todo: check if reserved or not
   }
@@ -145,6 +145,7 @@ class _offerDetails extends State<offerDetails> {
   }
 
   // depending on if the user already reserved this element, we need to show a different option in the navigation bar
+  // todo: check if logged user is the one who offers to not show reserve!
   Widget _NavBar() {
     if (!reserved) {
       return Padding(

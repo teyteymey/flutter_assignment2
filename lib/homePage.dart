@@ -5,6 +5,7 @@ import 'package:flutter_assignment2/myOffers.dart';
 import 'package:flutter_assignment2/offerDetails.dart';
 import 'package:flutter_assignment2/profilePage.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
+import 'Offer.dart';
 import 'globalVar.dart' as globals;
 import 'offerDetails.dart';
 import 'offerDetails.dart';
@@ -14,67 +15,6 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
-}
-
-// Returns all the objects offered in a certain area formatted as cards
-class Offer extends StatelessWidget {
-  String title = "default";
-  // ignore: non_constant_identifier_names
-  String best_before = "default";
-  String distance = "default";
-  List<String> offerDetailsList = [];
-  //default image
-  String image = "default";
-
-  // constructor method, sets all the attributes
-  Offer(List<String> offerDetailsList) {
-    this.offerDetailsList = offerDetailsList;
-    title = offerDetailsList.elementAt(3);
-    best_before = offerDetailsList.elementAt(7);
-    distance = "1.5 km"; // todo
-    image = offerDetailsList.elementAt(5);
-  }
-
-  @override
-  // the container of a card: it is a text button showing image, distance and best before date
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => offerDetails(offerDetailsList)),
-        );
-      },
-      child: Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-        child: Column(
-          children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: Image.network(
-                  image,
-                )),
-            ListTile(
-              title: Text(title,
-                  style: const TextStyle(
-                    fontFamily: 'JosefinSans',
-                    fontWeight: FontWeight.w900,
-                    fontSize: 20.0,
-                  )),
-              subtitle: Text(distance + "       Best before: " + best_before,
-                  style: const TextStyle(
-                    fontFamily: 'JosefinSans',
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14.0,
-                  )),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -104,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in globals.list) Offer(i)
+              for (var i in globals.allOffers) Offer(i)
             ], // for each offer, we create and display a card
           ),
         ),
@@ -145,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => profilePage(globals.users)),
+                              builder: (context) => profilePage()),
                         );
                       })),
             ],
