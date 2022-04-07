@@ -30,6 +30,7 @@ class _profilePage extends State<profilePage> {
   Widget friendsCard(Map<String, dynamic> userDetails) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      color: Color(0xFFE7FDB7),
       child: Row(
         children: [
           CircleAvatar(
@@ -59,6 +60,7 @@ class _profilePage extends State<profilePage> {
         onWillPop: () async => false,
         child: Scaffold(
             bottomNavigationBar: BottomAppBar(
+              color: Color(0xFFF9F9F9),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

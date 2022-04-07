@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
+          color: Color(0xFFF9F9F9),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -47,6 +47,7 @@ class _myOffers extends State<myOffers> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
+          color: Color(0xFFF9F9F9),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
