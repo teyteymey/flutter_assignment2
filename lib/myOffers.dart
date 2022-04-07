@@ -42,7 +42,7 @@ class _myOffers extends State<myOffers> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in globals.myoffers) Offer(i)
+              for (var i in globals.myoffers) Offer.fromMap(i)
             ], // for each offer, we create and display a card
           ),
         ),
