@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/homePage.dart';
+import 'package:flutter_assignment2/myOffers.dart';
 import 'globalVar.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
@@ -77,7 +78,13 @@ class _profilePage extends State<profilePage> {
                           icon: const Icon(Icons.favorite), onPressed: () {})),
                   Expanded(
                     child: IconButton(
-                        icon: const Icon(FontAwesome.food), onPressed: () {}),
+                        icon: const Icon(FontAwesome.food),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => myOffers()),
+                          );
+                        }),
                   ),
                   Expanded(
                       child: IconButton(
