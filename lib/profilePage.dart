@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/homePage.dart';
 import 'package:flutter_assignment2/myOffers.dart';
+import 'User.dart';
 import 'globalVar.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,33 +26,6 @@ class _profilePage extends State<profilePage> {
   _profilePage() {
     this.userDetails = globals.users; //todo: implement call to api
     this.friends = globals.friends; //todo: implement call to api
-  }
-
-  Widget friendsCard(Map<String, dynamic> userDetails) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      color: Color(0xFFE7FDB7),
-      child: Row(
-        children: [
-          CircleAvatar(
-              radius: 35,
-              backgroundImage: NetworkImage(
-                userDetails["picture"],
-              )),
-          Padding(
-              padding:
-                  EdgeInsets.only(left: 35)), //space between picture and name
-          Column(
-            children: [
-              Text(
-                userDetails["name"],
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              )
-            ],
-          )
-        ],
-      ),
-    );
   }
 
   @override
@@ -155,7 +129,7 @@ class _profilePage extends State<profilePage> {
                       ],
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
-                    for (var i in friends) friendsCard(i)
+                    for (var i in friends) userCard(i)
                   ],
                 ),
               ),

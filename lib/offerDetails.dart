@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'User.dart';
 import 'globalVar.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
+import 'profilePage.dart';
 
 class offerDetails extends StatefulWidget {
   Map<String, dynamic> offerDetailsMap = {};
@@ -301,7 +303,17 @@ class _offerDetails extends State<offerDetails> {
                   description,
                   textAlign: TextAlign.justify,
                 ),
-              )
+              ),
+              const Padding(
+                //divider
+                // divider of the text (grey line)
+                padding:
+                    EdgeInsets.only(top: 8.0, left: 15, right: 15, bottom: 8.0),
+                child: Divider(
+                  thickness: 1.5,
+                ),
+              ),
+              userCard(globals.users) //todo: pass info of the user
             ],
           ),
         ),
