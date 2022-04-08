@@ -307,8 +307,7 @@ class _offerDetails extends State<offerDetails> {
               const Padding(
                 //divider
                 // divider of the text (grey line)
-                padding:
-                    EdgeInsets.only(top: 8.0, left: 15, right: 15, bottom: 8.0),
+                padding: EdgeInsets.only(top: 8.0, left: 15, right: 15),
                 child: Divider(
                   thickness: 1.5,
                 ),
