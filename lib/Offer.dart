@@ -1,26 +1,20 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/myOffers.dart';
-import 'package:flutter_assignment2/offerDetails.dart';
-import 'package:flutter_assignment2/profilePage.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
-import 'globalVar.dart' as globals;
-import 'offerDetails.dart';
-import 'offerDetails.dart';
+import 'package:flutter_assignment2/offer_details.dart';
+import 'offer_details.dart';
 
 // Returns all the objects offered in a certain area formatted as cards
+// ignore: must_be_immutable
 class Offer extends StatelessWidget {
   int id = -1;
-  int category_id = -1;
-  int user_id = -1;
+  int categoryId = -1;
+  int userId = -1;
   String title = "default";
   String description = "default";
   String image = "default";
   bool closed = false;
-  String end_date = "20-02-2022";
-  String created_at = "20-02-2022";
-  String closed_at = "20-02-2022";
+  String endDate = "20-02-2022";
+  String createdAt = "20-02-2022";
+  String closedAt = "20-02-2022";
   String distance = "default";
 
   Map<String, dynamic> offerDetailsMap = {};
@@ -30,7 +24,7 @@ class Offer extends StatelessWidget {
       : super(key: key) {
     offerDetailsMap = offerDetails;
     title = offerDetails["title"];
-    end_date = offerDetails["end_date"];
+    endDate = offerDetails["end_date"];
     distance = "1.5 km"; // todo
     image = offerDetails["image"];
   }
@@ -38,29 +32,29 @@ class Offer extends StatelessWidget {
   Offer({
     Key? key,
     required this.id,
-    required this.category_id,
-    required this.user_id,
+    required this.categoryId,
+    required this.userId,
     required this.title,
     required this.description,
     required this.image,
     required this.closed,
-    required this.end_date,
-    required this.created_at,
-    required this.closed_at,
+    required this.endDate,
+    required this.createdAt,
+    required this.closedAt,
   }) : super(key: key);
 
   factory Offer.fromJson(Map<String, dynamic> json) {
     return Offer(
         id: json['id'],
-        category_id: json['category_id'],
-        user_id: json['user_id'],
+        categoryId: json['category_id'],
+        userId: json['user_id'],
         title: json['userId'],
         description: json['description'],
         image: json['image'],
         closed: json['closed'],
-        end_date: json['end_date'],
-        created_at: json['created_at'],
-        closed_at: json['closed_at']);
+        endDate: json['end_date'],
+        createdAt: json['created_at'],
+        closedAt: json['closed_at']);
   }
 
   @override
@@ -71,7 +65,7 @@ class Offer extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => offerDetails(offerDetailsMap)),
+              builder: (context) => OfferDetails(offerDetailsMap)),
         );
       },
       child: Card(
@@ -91,7 +85,7 @@ class Offer extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                     fontSize: 20.0,
                   )),
-              subtitle: Text(distance + "       Best before: " + end_date,
+              subtitle: Text(distance + "       Best before: " + endDate,
                   style: const TextStyle(
                     fontFamily: 'JosefinSans',
                     fontWeight: FontWeight.normal,

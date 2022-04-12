@@ -1,0 +1,140 @@
+@startuml
+set namespaceSeparator ::
+
+class "flutter_assignment2::homePage.dart::MyHomePage" {
+  +State<MyHomePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::homePage.dart::MyHomePage"
+
+class "flutter_assignment2::homePage.dart::_MyHomePageState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::homePage.dart::_MyHomePageState"
+
+class "flutter_assignment2::loginPage.dart::loginPage" {
+  +State<loginPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::loginPage.dart::loginPage"
+
+class "flutter_assignment2::loginPage.dart::_loginPage" {
+  +TextEditingController myControllerUsername
+  +TextEditingController myControllerPassword
+  +Widget build()
+}
+
+"flutter_assignment2::loginPage.dart::_loginPage" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::loginPage.dart::_loginPage"
+
+class "flutter_assignment2::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_assignment2::main.dart::MyApp"
+
+class "flutter_assignment2::main.dart::LogoPage" {
+  +String title
+  +State<LogoPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::main.dart::LogoPage"
+
+class "flutter_assignment2::main.dart::_LogoPage" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::main.dart::_LogoPage"
+
+class "flutter_assignment2::myOffers.dart::myOffers" {
+  +State<myOffers> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::myOffers.dart::myOffers"
+
+class "flutter_assignment2::myOffers.dart::_myOffers" {
+  +Map<String, dynamic> userDetails
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::myOffers.dart::_myOffers"
+
+class "flutter_assignment2::Offer.dart::Offer" {
+  +int id
+  +int category_id
+  +int user_id
+  +String title
+  +String description
+  +String image
+  +bool closed
+  +String end_date
+  +String created_at
+  +String closed_at
+  +String distance
+  +Map<String, dynamic> offerDetailsMap
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_assignment2::Offer.dart::Offer"
+
+class "flutter_assignment2::offerDetails.dart::offerDetails" {
+  +Map<String, dynamic> offerDetailsMap
+  +State<offerDetails> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::offerDetails.dart::offerDetails"
+
+class "flutter_assignment2::offerDetails.dart::_offerDetails" {
+  +Map<String, dynamic> offerDetails
+  +String title
+  +String best_before
+  +String distance
+  +String image
+  +String city
+  +String description
+  +bool reserved
+  +void reserve()
+  +void cancelReservation()
+  +void checkIfReserved()
+  -Future<void> _showReservationConfirmationDialog()
+  -Future<void> _showAnimationOfReservationDialog()
+  -Widget _NavBar()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::offerDetails.dart::_offerDetails"
+
+class "flutter_assignment2::profilePage.dart::profilePage" {
+  +State<profilePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::profilePage.dart::profilePage"
+
+class "flutter_assignment2::profilePage.dart::_profilePage" {
+  +Map<String, dynamic> userDetails
+  +List<Map<String, dynamic>> friends
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::profilePage.dart::_profilePage"
+
+class "flutter_assignment2::registerPage.dart::registerPage" {
+  +State<registerPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::registerPage.dart::registerPage"
+
+class "flutter_assignment2::registerPage.dart::_registerPage" {
+  +TextEditingController myControllerUsername
+  +TextEditingController myControllerPassword
+  +TextEditingController myControllerPassword2
+  +Widget build()
+}
+
+"flutter_assignment2::registerPage.dart::_registerPage" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::registerPage.dart::_registerPage"
+
+
+@enduml

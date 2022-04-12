@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/loginPage.dart';
+import 'package:flutter_assignment2/login_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -35,7 +35,7 @@ class _LogoPage extends State<LogoPage> {
   void initState() {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => loginPage()));
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
     });
     super.initState();
   }

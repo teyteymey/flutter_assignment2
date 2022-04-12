@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/homePage.dart';
+import 'package:flutter_assignment2/home_page.dart';
+import 'package:flutter_assignment2/register_page.dart';
 
-class registerPage extends StatefulWidget {
-  registerPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<registerPage> createState() => _registerPage();
+  State<LoginPage> createState() => _LoginPage();
 }
 
 // this class builds the details of a certain offer
-// ignore: camel_case_types
-class _registerPage extends State<registerPage> {
+class _LoginPage extends State<LoginPage> {
   //Atributes
   //the controlers are useful to retrieve the tect from the text fields
   final myControllerUsername = TextEditingController();
   final myControllerPassword = TextEditingController();
-  final myControllerPassword2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,6 @@ class _registerPage extends State<registerPage> {
                 padding: EdgeInsets.only(
                     top: 120.0, left: 100, right: 100, bottom: 30),
                 child: Image(
-                  width: 100,
                   image: AssetImage("images/appvocado-loading.png"),
                 ),
               ),
@@ -53,7 +51,7 @@ class _registerPage extends State<registerPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 0),
+                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                 child: TextFormField(
                   controller: myControllerPassword,
                   maxLength: 25,
@@ -69,26 +67,9 @@ class _registerPage extends State<registerPage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, bottom: 40),
-                child: TextFormField(
-                  controller: myControllerPassword2,
-                  maxLength: 25,
-                  decoration: const InputDecoration(
-                    labelText: 'Repeat password',
-                    labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 42, 134, 0),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 42, 134, 0)),
-                    ),
-                  ),
-                ),
-              ),
               SizedBox(
                 height: 40,
-                width: 200,
+                width: 100,
                 child: ElevatedButton(
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -103,8 +84,7 @@ class _registerPage extends State<registerPage> {
                   onPressed: () {
                     // Respond to button press
                     if (myControllerPassword.text == "" ||
-                        myControllerUsername.text == "" ||
-                        myControllerPassword2.text == "") {
+                        myControllerUsername.text == "") {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -116,53 +96,32 @@ class _registerPage extends State<registerPage> {
                                 const Color.fromARGB(237, 244, 242, 221),
                             // Retrieve the text that the user has entered by using the
                             // TextEditingController.
-                            content: const SizedBox(
-                              height: 60,
-                              width: 40,
-                              child: Center(
-                                child: Text(
-                                  "Fill all the required fields",
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    } else if (myControllerPassword
-                            .text != //if passwords are not the same
-                        myControllerPassword2.text) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    15.0)), //make alert rounded
-                            backgroundColor:
-                                const Color.fromARGB(237, 244, 242, 221),
-                            // Retrieve the text that the user has entered by using the
-                            // TextEditingController.
-                            content: const SizedBox(
-                              height: 60,
-                              width: 40,
-                              child: Center(
-                                child: Text(
-                                  "Passwords do not match",
-                                ),
-                              ),
-                            ),
+                            content:
+                                const Text("Input a password and username"),
                           );
                         },
                       );
                     } else {
+                      //todo: implement call to api
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const MyHomePage()));
                     }
                   },
-                  child: const Text('Create account'),
+                  child: const Text('Login'),
                 ),
+              ),
+              TextButton(
+                //register button
+                onPressed: () {
+                  // Respond to button press
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterPage()));
+                },
+                child: const Text("Sign up"),
               )
             ],
           ),

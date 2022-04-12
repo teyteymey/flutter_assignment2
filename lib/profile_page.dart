@@ -1,32 +1,27 @@
-import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/homePage.dart';
-import 'package:flutter_assignment2/myOffers.dart';
-import 'User.dart';
-import 'globalVar.dart' as globals;
+import 'package:flutter_assignment2/home_page.dart';
+import 'package:flutter_assignment2/my_offers.dart';
+import 'user.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:flutter/cupertino.dart';
 
-class profilePage extends StatefulWidget {
-  profilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<profilePage> createState() => _profilePage();
+  State<ProfilePage> createState() => _ProfilePage();
 }
 
 // this class builds the details of a certain offer
-class _profilePage extends State<profilePage> {
+class _ProfilePage extends State<ProfilePage> {
   //Atributes
   Map<String, dynamic> userDetails = {};
   List<Map<String, dynamic>> friends = [];
 
   // Constructor method
-  _profilePage() {
-    this.userDetails = globals.users; //todo: implement call to api
-    this.friends = globals.friends; //todo: implement call to api
-  }
+  // _profilePage() {
+  //   this.userDetails = globals.users; //todo: implement call to api
+  //   this.friends = globals.friends; //todo: implement call to api
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +29,7 @@ class _profilePage extends State<profilePage> {
         onWillPop: () async => false,
         child: Scaffold(
             bottomNavigationBar: BottomAppBar(
-              color: Color(0xFFF9F9F9),
+              color: const Color(0xFFF9F9F9),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -58,7 +53,8 @@ class _profilePage extends State<profilePage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => myOffers()),
+                            MaterialPageRoute(
+                                builder: (context) => const MyOffers()),
                           );
                         }),
                   ),
@@ -90,7 +86,7 @@ class _profilePage extends State<profilePage> {
                       radius: 100,
                       backgroundImage: NetworkImage(userDetails["picture"]),
                     ),
-                    const Padding(padding: const EdgeInsets.only(top: 10)),
+                    const Padding(padding: EdgeInsets.only(top: 10)),
                     Text(
                       userDetails["name"], //name of user
                       style: const TextStyle(

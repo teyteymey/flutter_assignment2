@@ -1,29 +1,25 @@
-import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/homePage.dart';
-import 'package:flutter_assignment2/profilePage.dart';
-import 'Offer.dart';
-import 'globalVar.dart' as globals;
+import 'package:flutter_assignment2/my_offers.dart';
+import 'package:flutter_assignment2/profile_page.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:flutter/cupertino.dart';
+import 'offer.dart';
+import 'global_var.dart' as globals;
 
-class myOffers extends StatefulWidget {
-  myOffers({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<myOffers> createState() => _myOffers();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-// this class builds the details of a certain offer
-class _myOffers extends State<myOffers> {
-  //Atributes
-  Map<String, dynamic> userDetails = {};
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    // This method is rerun every time setState is called,.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -31,7 +27,7 @@ class _myOffers extends State<myOffers> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: const Text(
-            'Your offers',
+            'Offers near you',
             textAlign: TextAlign.center,
           ),
           backgroundColor: const Color(0xFFF4F2DD),
@@ -42,25 +38,20 @@ class _myOffers extends State<myOffers> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in globals.myoffers) Offer.fromMap(i)
+              for (var i in globals.allOffers) Offer.fromMap(i)
             ], // for each offer, we create and display a card
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          color: Color(0xFFF9F9F9),
+          color: const Color(0xFFF9F9F9),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                  //explore page
+                  //explore button
                   child: IconButton(
                 icon: const Icon(Icons.travel_explore),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MyHomePage()),
-                  );
-                },
+                onPressed: () {},
               )),
               Expanded(
                   //favorite items
@@ -70,7 +61,13 @@ class _myOffers extends State<myOffers> {
                 //my offers
                 child: IconButton(
                     icon: const Icon(FontAwesome.food),
-                    onPressed: () {}), //in this case do nothing bc we are here
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MyOffers()),
+                      );
+                    }),
               ),
               Expanded(
                   //messages
@@ -84,7 +81,7 @@ class _myOffers extends State<myOffers> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => profilePage()),
+                              builder: (context) => const ProfilePage()),
                         );
                       })),
             ],

@@ -1,24 +1,24 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'User.dart';
-import 'globalVar.dart' as globals;
+import 'user.dart';
+import 'global_var.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'profilePage.dart';
 
-class offerDetails extends StatefulWidget {
+// ignore: must_be_immutable
+class OfferDetails extends StatefulWidget {
   Map<String, dynamic> offerDetailsMap = {};
 
-  offerDetails(this.offerDetailsMap, {Key? key}) : super(key: key);
+  OfferDetails(this.offerDetailsMap, {Key? key}) : super(key: key);
 
   @override
-  State<offerDetails> createState() => _offerDetails(offerDetailsMap);
+  // ignore: no_logic_in_create_state
+  State<OfferDetails> createState() => _OfferDetails(offerDetailsMap);
 }
 
 // this class builds the details of a certain offer
-class _offerDetails extends State<offerDetails> {
+class _OfferDetails extends State<OfferDetails> {
   // ATTRIBUTES
   Map<String, dynamic> offerDetails = {};
   String title = "default";
@@ -33,12 +33,12 @@ class _offerDetails extends State<offerDetails> {
 
   // BUILDER METHOD
   // we set the attributes of the offer
-  _offerDetails(Map<String, dynamic> offerDetails) {
-    this.offerDetails = offerDetails;
+  _OfferDetails(Map<String, dynamic> offerDetails) {
+    offerDetails = offerDetails;
     title = offerDetails["title"];
     best_before = offerDetails["end_date"];
     distance = "1.5 km"; // todo
-    this.city = "Deventer"; //todo
+    city = "Deventer"; //todo
     image = offerDetails["image"];
     description = offerDetails["description"];
     reserved = false; //default
@@ -106,7 +106,7 @@ class _offerDetails extends State<offerDetails> {
   // shows that the reservation has succesfully happened
   Future<void> _showAnimationOfReservationDialog() async {
     Timer _timer;
-    _timer = Timer(Duration(seconds: 1), () {
+    _timer = Timer(const Duration(seconds: 1), () {
       //to autoclose the dialog
       Navigator.of(context).pop();
       // todo: recharge page so the navigation bar changes to cancel reservation
@@ -148,7 +148,7 @@ class _offerDetails extends State<offerDetails> {
 
   // depending on if the user already reserved this element, we need to show a different option in the navigation bar
   // todo: check if logged user is the one who offers to not show reserve!
-  Widget _NavBar() {
+  Widget navBar() {
     if (!reserved) {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 15, right: 15),
@@ -181,7 +181,7 @@ class _offerDetails extends State<offerDetails> {
         child: TextButton(
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromARGB(255, 245, 52, 35)),
+                  const Color.fromARGB(255, 245, 52, 35)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius:
@@ -209,7 +209,7 @@ class _offerDetails extends State<offerDetails> {
       onWillPop: () async => false,
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        bottomNavigationBar: _NavBar(),
+        bottomNavigationBar: navBar(),
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(FontAwesome.angle_left),
