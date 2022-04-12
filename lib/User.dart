@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 Widget userCard(Map<String, dynamic> userDetails) {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-    color: const Color(0xFFE7FDB7),
+    color: const Color.fromARGB(237, 244, 242, 221),
     child: Row(
       children: [
         CircleAvatar(
