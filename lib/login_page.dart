@@ -16,6 +16,9 @@ class _LoginPage extends State<LoginPage> {
   final myControllerUsername = TextEditingController();
   final myControllerPassword = TextEditingController();
 
+  //TODO: create call to api
+  void validateLogin() {}
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -37,6 +40,7 @@ class _LoginPage extends State<LoginPage> {
                 padding: const EdgeInsets.only(top: 10.0, left: 30, right: 30),
                 child: TextFormField(
                   controller: myControllerUsername,
+                  key: const Key('username'),
                   maxLength: 25,
                   decoration: const InputDecoration(
                     labelText: 'Username',
@@ -54,6 +58,7 @@ class _LoginPage extends State<LoginPage> {
                 padding: const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                 child: TextFormField(
                   controller: myControllerPassword,
+                  key: const Key('password'),
                   maxLength: 25,
                   decoration: const InputDecoration(
                     labelText: 'Password',
@@ -103,6 +108,7 @@ class _LoginPage extends State<LoginPage> {
                       );
                     } else {
                       //todo: implement call to api
+                      validateLogin();
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
