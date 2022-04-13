@@ -5,9 +5,9 @@ import 'offer_details.dart';
 // Returns all the objects offered in a certain area formatted as cards
 // ignore: must_be_immutable
 class Offer extends StatelessWidget {
-  int id = -1;
-  int categoryId = -1;
-  int userId = -1;
+  String id = "-1";
+  String categoryId = "-1";
+  String userId = "-1";
   String title = "default";
   String description = "default";
   String image = "default";
@@ -48,7 +48,7 @@ class Offer extends StatelessWidget {
         id: json['id'],
         categoryId: json['category_id'],
         userId: json['user_id'],
-        title: json['userId'],
+        title: json['title'],
         description: json['description'],
         image: json['image'],
         closed: json['closed'],
