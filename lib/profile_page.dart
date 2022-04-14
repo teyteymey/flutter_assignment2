@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/home_page.dart';
+import 'package:flutter_assignment2/messages_page.dart';
 import 'package:flutter_assignment2/my_offers.dart';
 import 'user.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
+import 'global_var.dart' as globals;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -17,11 +19,10 @@ class _ProfilePage extends State<ProfilePage> {
   Map<String, dynamic> userDetails = {};
   List<Map<String, dynamic>> friends = [];
 
-  // Constructor method
-  // _profilePage() {
-  //   this.userDetails = globals.users; //todo: implement call to api
-  //   this.friends = globals.friends; //todo: implement call to api
-  // }
+  _ProfilePage() {
+    userDetails = globals.users; //todo: implement call to api
+    friends = globals.friends; //todo: implement call to api
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,14 @@ class _ProfilePage extends State<ProfilePage> {
                   ),
                   Expanded(
                       child: IconButton(
-                          icon: const Icon(Icons.mail), onPressed: () {})),
+                          icon: const Icon(Icons.mail),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MessagesPage()),
+                            );
+                          })),
                   Expanded(
                       child: IconButton(
                           icon: const Icon(Icons.person), onPressed: () {})),

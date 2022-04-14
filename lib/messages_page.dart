@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/messages_page.dart';
+import 'package:flutter_assignment2/home_page.dart';
+import 'package:flutter_assignment2/message.dart';
 import 'package:flutter_assignment2/my_offers.dart';
 import 'package:flutter_assignment2/profile_page.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
 import 'offer.dart';
 import 'global_var.dart' as globals;
+import 'package:fluttericon/font_awesome_icons.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class MessagesPage extends StatefulWidget {
+  const MessagesPage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MessagesPage> createState() => _MessagesPage();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+// this class builds the details of a certain offer
+class _MessagesPage extends State<MessagesPage> {
+  //Atributes
+  Map<String, dynamic> userDetails = {};
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called,.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: const Text(
-            'Offers near you',
+            'Your messages',
             textAlign: TextAlign.center,
           ),
           backgroundColor: const Color(0xFFF4F2DD),
@@ -39,7 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in globals.allOffers) Offer.fromMap(i)
+              const Padding(
+                  padding: EdgeInsets.only(top: 10)), // separation form the top
+              for (var i in globals.my_messages) Message.fromMap(i)
             ], // for each offer, we create and display a card
           ),
         ),
@@ -49,10 +51,15 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                  //explore button
+                  //explore page
                   child: IconButton(
                 icon: const Icon(Icons.travel_explore),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyHomePage()),
+                  );
+                },
               )),
               Expanded(
                   //favorite items
@@ -73,14 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                   //messages
                   child: IconButton(
-                      icon: const Icon(Icons.mail),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MessagesPage()),
-                        );
-                      })),
+                      icon: const Icon(Icons.mail), onPressed: () {})),
               Expanded(
                   //my profile
                   child: IconButton(

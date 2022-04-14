@@ -102,3 +102,30 @@ final List<Map<String, dynamic>> allOffers = [
     "closed_at": null
   }
 ];
+
+final List<Map<String, dynamic>> my_messages = [
+  {
+    "offerId": "1",
+    "solicitorName": "Max",
+    "imageOfSolicitor":
+        "https://media-exp1.licdn.com/dms/image/C4E03AQFNGTHPmKwtpg/profile-displayphoto-shrink_200_200/0/1636835948163?e=1652313600&v=beta&t=tKw-Eu_L_Y-zP5XpFuAAujKUCkNgQ_pof41Ch6DYXuU",
+    "imageOfOffer":
+        "https://www.nipponexpress.com/press/report/img/06-Nov-20-ogp.jpeg"
+  },
+  {
+    "offerId": "1",
+    "solicitorName": "Rachel",
+    "imageOfSolicitor":
+        "https://upload.wikimedia.org/wikipedia/commons/f/f6/Rachel_McAdams_2016.jpg",
+    "imageOfOffer":
+        "https://www.nipponexpress.com/press/report/img/06-Nov-20-ogp.jpeg"
+  },
+  {
+    "offerId": "1",
+    "solicitorName": "John",
+    "imageOfSolicitor":
+        "https://upload.wikimedia.org/wikipedia/commons/8/80/Elton_John_2011_Shankbone_2_%28cropped%29.JPG",
+    "imageOfOffer":
+        "https://www.treehugger.com/thmb/t8TT-yVy27p2YsHykqpIjBm646M=/1414x1414/smart/filters:no_upscale()/GettyImages-171589415-b339b6ad9fda46438298578316458131.jpg"
+  },
+];

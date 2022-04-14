@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/home_page.dart';
+import 'package:flutter_assignment2/messages_page.dart';
 import 'package:flutter_assignment2/profile_page.dart';
 import 'offer.dart';
 import 'global_var.dart' as globals;
@@ -70,7 +71,14 @@ class _MyOffers extends State<MyOffers> {
               Expanded(
                   //messages
                   child: IconButton(
-                      icon: const Icon(Icons.mail), onPressed: () {})),
+                      icon: const Icon(Icons.mail),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MessagesPage()),
+                        );
+                      })),
               Expanded(
                   //my profile
                   child: IconButton(

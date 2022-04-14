@@ -45,16 +45,16 @@ class _OfferDetails extends State<OfferDetails> {
     checkIfReserved(); //todo: check if reserved or not
   }
 
-  //todo
+  //TODO: reservation to API
   void reserve() {
     //todo -> call to backend
     _showReservationConfirmationDialog();
   }
 
-  //todo
+  //TODO
   void cancelReservation() {}
 
-  //todo: need to check if this item is already reserved by the active user to
+  //TODO: need to check if this item is already reserved by the active user to
   //show the corresponding navigation bar (reserve or cancel reservation)
   void checkIfReserved() {}
 
