@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/home_page.dart';
 import 'package:flutter_assignment2/messages_page.dart';
+import 'package:flutter_assignment2/post_offer.dart';
 import 'package:flutter_assignment2/profile_page.dart';
 import 'offer.dart';
 import 'global_var.dart' as globals;
@@ -46,7 +47,10 @@ class _MyOffers extends State<MyOffers> {
           backgroundColor: const Color.fromARGB(255, 42, 134, 0),
           foregroundColor: Colors.white,
           onPressed: () {
-            // Respond to button press
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PostOffer()),
+            );
           },
           child: const Icon(Icons.add),
         ),
