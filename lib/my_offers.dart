@@ -42,6 +42,14 @@ class _MyOffers extends State<MyOffers> {
             ], // for each offer, we create and display a card
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 42, 134, 0),
+          foregroundColor: Colors.white,
+          onPressed: () {
+            // Respond to button press
+          },
+          child: const Icon(Icons.add),
+        ),
         bottomNavigationBar: BottomAppBar(
           color: const Color(0xFFF9F9F9),
           child: Row(
