@@ -129,3 +129,5 @@ final List<Map<String, dynamic>> my_messages = [
         "https://www.treehugger.com/thmb/t8TT-yVy27p2YsHykqpIjBm646M=/1414x1414/smart/filters:no_upscale()/GettyImages-171589415-b339b6ad9fda46438298578316458131.jpg"
   },
 ];
+
+List<String> pathImages = [];

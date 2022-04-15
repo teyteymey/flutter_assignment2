@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/home_page.dart';
 import 'package:flutter_assignment2/my_offers.dart';
 import 'package:flutter_assignment2/register_page.dart';
+import 'take_picture.dart';
+import 'global_var.dart' as globals;
+import 'package:camera/camera.dart';
 
 class PostOffer extends StatefulWidget {
   const PostOffer({Key? key}) : super(key: key);
@@ -16,6 +19,14 @@ class _PostOffer extends State<PostOffer> {
   //the controlers are useful to retrieve the tect from the text fields
   final myControllerName = TextEditingController();
   final myControllerDescription = TextEditingController();
+
+  String image1 = "";
+  String image2 = "";
+  String image3 = "";
+  String image4 = "";
+
+  // _PostOffer(
+  //     [this.image1 = "", this.image2 = "", this.image3 = "", this.image4 = ""]);
 
   //TODO: create call to api
   void validateOffer() {}
@@ -52,8 +63,26 @@ class _PostOffer extends State<PostOffer> {
                       decoration: BoxDecoration(
                           color: const Color(0xFFCBD781),
                           borderRadius: BorderRadius.circular(10)),
-                      child: const Icon(
-                        Icons.camera_alt,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.camera_alt,
+                        ),
+                        onPressed: () async {
+                          WidgetsFlutterBinding.ensureInitialized();
+
+                          // Obtain a list of the available cameras on the device.
+                          final cameras = await availableCameras();
+
+                          // Get a specific camera from the list of available cameras.
+                          final firstCamera = cameras.first;
+
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TakePictureScreen(
+                                        camera: firstCamera,
+                                      )));
+                        },
                       )),
                   Container(
                       height: 50,
