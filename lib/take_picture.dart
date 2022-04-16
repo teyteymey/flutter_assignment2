@@ -81,7 +81,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // If the picture was taken, display it on a new screen.
             globals.pathImages.add(image.path);
             await Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => PostOffer()),
+              MaterialPageRoute(builder: (context) => const PostOffer()),
             );
           } catch (e) {
             // If an error occurs, log the error to the console.

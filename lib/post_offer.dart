@@ -1,7 +1,8 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/home_page.dart';
 import 'package:flutter_assignment2/my_offers.dart';
-import 'package:flutter_assignment2/register_page.dart';
 import 'take_picture.dart';
 import 'global_var.dart' as globals;
 import 'package:camera/camera.dart';
@@ -25,11 +26,62 @@ class _PostOffer extends State<PostOffer> {
   String image3 = "";
   String image4 = "";
 
+  _PostOffer() {
+    int size = globals.pathImages.length;
+    if (size >= 1) image1 = globals.pathImages[0];
+    if (size >= 2) image2 = globals.pathImages[1];
+    if (size >= 3) image3 = globals.pathImages[2];
+    if (size >= 4) image4 = globals.pathImages[3];
+  }
+
   // _PostOffer(
   //     [this.image1 = "", this.image2 = "", this.image3 = "", this.image4 = ""]);
 
   //TODO: create call to api
   void validateOffer() {}
+
+  // Builds the container of the picture. Its a button, so when clicked you can take a picture.
+  Widget pictureButton() {
+    return Container(
+        height: 50,
+        width: 70,
+        decoration: BoxDecoration(
+            color: const Color(0xFFCBD781),
+            borderRadius: BorderRadius.circular(10)),
+        child: IconButton(
+          icon: const Icon(
+            Icons.camera_alt,
+          ),
+          onPressed: () async {
+            WidgetsFlutterBinding.ensureInitialized();
+
+            // Obtain a list of the available cameras on the device.
+            final cameras = await availableCameras();
+
+            // Get a specific camera from the list of available cameras.
+            final firstCamera = cameras.first;
+
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TakePictureScreen(
+                          camera: firstCamera,
+                        )));
+          },
+        ));
+  }
+
+  // Returns the picture taken and displays it where the button to take a picture was
+  Widget imageContainer(String imagePath) {
+    return Container(
+      height: 50,
+      width: 70,
+      decoration: BoxDecoration(
+          color: const Color(0xFFCBD781),
+          borderRadius: BorderRadius.circular(10)),
+      child: Image.file(File(imagePath)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,60 +109,10 @@ class _PostOffer extends State<PostOffer> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                      height: 50,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFCBD781),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.camera_alt,
-                        ),
-                        onPressed: () async {
-                          WidgetsFlutterBinding.ensureInitialized();
-
-                          // Obtain a list of the available cameras on the device.
-                          final cameras = await availableCameras();
-
-                          // Get a specific camera from the list of available cameras.
-                          final firstCamera = cameras.first;
-
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TakePictureScreen(
-                                        camera: firstCamera,
-                                      )));
-                        },
-                      )),
-                  Container(
-                      height: 50,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFCBD781),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Icon(
-                        Icons.camera_alt,
-                      )),
-                  Container(
-                      height: 50,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFCBD781),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Icon(
-                        Icons.camera_alt,
-                      )),
-                  Container(
-                      height: 50,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFCBD781),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Icon(
-                        Icons.camera_alt,
-                      )),
+                  if (image1 != "") imageContainer(image1) else pictureButton(),
+                  if (image2 != "") imageContainer(image2) else pictureButton(),
+                  if (image3 != "") imageContainer(image3) else pictureButton(),
+                  if (image4 != "") imageContainer(image4) else pictureButton(),
                 ],
               ),
               Padding(
