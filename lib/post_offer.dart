@@ -6,6 +6,8 @@ import 'package:flutter_assignment2/my_offers.dart';
 import 'take_picture.dart';
 import 'global_var.dart' as globals;
 import 'package:camera/camera.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class PostOffer extends StatefulWidget {
   const PostOffer({Key? key}) : super(key: key);
@@ -20,6 +22,8 @@ class _PostOffer extends State<PostOffer> {
   //the controlers are useful to retrieve the tect from the text fields
   final myControllerName = TextEditingController();
   final myControllerDescription = TextEditingController();
+  final myControllerDate = TextEditingController();
+  DateTime? newDate;
 
   String image1 = "";
   String image2 = "";
@@ -37,8 +41,45 @@ class _PostOffer extends State<PostOffer> {
   // _PostOffer(
   //     [this.image1 = "", this.image2 = "", this.image3 = "", this.image4 = ""]);
 
-  //TODO: create call to api
   void validateOffer() {}
+  //TODO: create call to api
+  //TODO: since in this case the api is not ready, i can not add it to the offers because this image is in local files
+  // and it should be in the network.
+  // the path would not work to display the offer so I am not adding it yet.
+  // void validateOffer() {
+  //   DateTime now = DateTime.now();
+  //   DateTime date = DateTime(now.year, now.month, now.day);
+  //   Map<String, dynamic> newOffer;
+
+  //   try (DateFormat('dd-mm-yyyy').format(DateTime.parse(myControllerDate.text))) {
+  //     //meaning the entered date is correct
+  //     newOffer = {
+  //       "id": "1",
+  //       "category_id": "1",
+  //       "user_id": "1",
+  //       "title": myControllerName.text,
+  //       "description": myControllerDescription.text,
+  //       "image": image1,
+  //       "closed": false,
+  //       "end_date": myControllerDate.text,
+  //       "created_at": date.toString(),
+  //       "closed_at": null
+  //     };
+
+  //     Navigator.pushReplacement(
+  //         context, MaterialPageRoute(builder: (context) => const MyOffers()));
+
+  //     globals.pathImages.clear();
+
+  //   AlertDialog(
+  //       shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+  //       backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+  //       // Retrieve the text that the user has entered by using the
+  //       // TextEditingController.
+  //       content: const Text("The entered date is not in the correct format"),
+  //     );
+  // };
 
   // Builds the container of the picture. Its a button, so when clicked you can take a picture.
   Widget pictureButton() {
@@ -80,6 +121,16 @@ class _PostOffer extends State<PostOffer> {
           color: const Color(0xFFCBD781),
           borderRadius: BorderRadius.circular(10)),
       child: Image.file(File(imagePath)),
+    );
+  }
+
+  Future<void> datePicker() async {
+    newDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2020, 11, 17),
+      firstDate: DateTime(2017, 1),
+      lastDate: DateTime(2022, 7),
+      helpText: 'Select a date',
     );
   }
 
@@ -134,6 +185,24 @@ class _PostOffer extends State<PostOffer> {
                 ),
               ),
               Padding(
+                padding: const EdgeInsets.only(top: 10.0, left: 30, right: 30),
+                child: TextFormField(
+                  controller: myControllerDate,
+                  key: const Key('bestBefore'),
+                  decoration: const InputDecoration(
+                    labelText: 'Best before',
+                    helperText: 'dd/mm/yyyy',
+                    labelStyle: TextStyle(
+                      color: Color.fromARGB(255, 42, 134, 0),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 42, 134, 0)),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(
                     left: 30, right: 30, bottom: 20, top: 40),
                 child: TextFormField(
@@ -141,7 +210,7 @@ class _PostOffer extends State<PostOffer> {
                   minLines: 5,
                   controller: myControllerDescription,
                   key: const Key('description'),
-                  maxLength: 25,
+                  maxLength: 256,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderSide:
@@ -170,7 +239,8 @@ class _PostOffer extends State<PostOffer> {
                   onPressed: () {
                     // Respond to button press
                     if (myControllerDescription.text == "" ||
-                        myControllerName.text == "") {
+                        myControllerName.text == "" ||
+                        myControllerDate.text == "") {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -183,17 +253,13 @@ class _PostOffer extends State<PostOffer> {
                             // Retrieve the text that the user has entered by using the
                             // TextEditingController.
                             content: const Text(
-                                "Input name and a description for the offer"),
+                                "Please fill all the required fields"),
                           );
                         },
                       );
                     } else {
                       //todo: implement call to api
                       validateOffer();
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MyOffers()));
                     }
                   },
                   child: const Text('Post offer'),
