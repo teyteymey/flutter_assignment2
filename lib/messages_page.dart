@@ -88,7 +88,9 @@ class _MessagesPage extends State<MessagesPage> {
               Expanded(
                   //messages
                   child: IconButton(
-                      icon: const Icon(Icons.mail), onPressed: () {})),
+                      icon: const Icon(Icons.mail,
+                          color: const Color(0xFF2A8600)),
+                      onPressed: () {})),
               Expanded(
                   //my profile
                   child: IconButton(

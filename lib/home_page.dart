@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         decoration: InputDecoration(
                           hintText: 'search for specific word',
                           hintStyle: TextStyle(
-                            color: const Color(0xFF2A8600),
+                            color: Color(0xFF2A8600),
                             fontSize: 18,
                             fontStyle: FontStyle.italic,
                           ),
@@ -92,7 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                   //explore button
                   child: IconButton(
-                icon: const Icon(Icons.travel_explore),
+                icon: const Icon(
+                  Icons.travel_explore,
+                  color: const Color(0xFF2A8600),
+                ),
                 onPressed: () {},
               )),
               Expanded(

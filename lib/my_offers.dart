@@ -85,7 +85,8 @@ class _MyOffers extends State<MyOffers> {
               Expanded(
                 //my offers
                 child: IconButton(
-                    icon: const Icon(FontAwesome.food),
+                    icon: const Icon(FontAwesome.food,
+                        color: const Color(0xFF2A8600)),
                     onPressed: () {}), //in this case do nothing bc we are here
               ),
               Expanded(

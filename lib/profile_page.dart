@@ -79,7 +79,9 @@ class _ProfilePage extends State<ProfilePage> {
                           })),
                   Expanded(
                       child: IconButton(
-                          icon: const Icon(Icons.person), onPressed: () {})),
+                          icon: const Icon(Icons.person,
+                              color: const Color(0xFF2A8600)),
+                          onPressed: () {})),
                 ],
               ),
             ),

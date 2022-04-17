@@ -14,6 +14,7 @@ class FavoritesPage extends StatefulWidget {
   State<FavoritesPage> createState() => _FavoritesPageState();
 }
 
+// I cant implement the method to add favorites because I need the api for that.
 class _FavoritesPageState extends State<FavoritesPage> {
   Widget customSearchBar = const Text('Favorite offers');
   @override
@@ -62,7 +63,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
               Expanded(
                   //favorite items
                   child: IconButton(
-                      icon: const Icon(Icons.favorite), onPressed: () {})),
+                      icon: const Icon(Icons.favorite,
+                          color: const Color(0xFF2A8600)),
+                      onPressed: () {})),
               Expanded(
                 //my offers
                 child: IconButton(
