@@ -41,45 +41,57 @@ class _PostOffer extends State<PostOffer> {
   // _PostOffer(
   //     [this.image1 = "", this.image2 = "", this.image3 = "", this.image4 = ""]);
 
-  void validateOffer() {}
-  //TODO: create call to api
   //TODO: since in this case the api is not ready, i can not add it to the offers because this image is in local files
   // and it should be in the network.
   // the path would not work to display the offer so I am not adding it yet.
-  // void validateOffer() {
-  //   DateTime now = DateTime.now();
-  //   DateTime date = DateTime(now.year, now.month, now.day);
-  //   Map<String, dynamic> newOffer;
+  // This method gathers all the information and sends a request to the api with the info of the new offer.
+  void validateOffer() {
+    Map<String, dynamic> newOffer;
+    try {
+      //check if best before date is correct
 
-  //   try (DateFormat('dd-mm-yyyy').format(DateTime.parse(myControllerDate.text))) {
-  //     //meaning the entered date is correct
-  //     newOffer = {
-  //       "id": "1",
-  //       "category_id": "1",
-  //       "user_id": "1",
-  //       "title": myControllerName.text,
-  //       "description": myControllerDescription.text,
-  //       "image": image1,
-  //       "closed": false,
-  //       "end_date": myControllerDate.text,
-  //       "created_at": date.toString(),
-  //       "closed_at": null
-  //     };
+      DateFormat format = DateFormat("dd/MM/yyyy");
 
-  //     Navigator.pushReplacement(
-  //         context, MaterialPageRoute(builder: (context) => const MyOffers()));
+      DateTime now = DateTime.now();
+      String todaydate = format.format(now);
 
-  //     globals.pathImages.clear();
+      print(todaydate);
 
-  //   AlertDialog(
-  //       shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(15.0)), //make alert rounded
-  //       backgroundColor: const Color.fromARGB(237, 244, 242, 221),
-  //       // Retrieve the text that the user has entered by using the
-  //       // TextEditingController.
-  //       content: const Text("The entered date is not in the correct format"),
-  //     );
-  // };
+      DateTime dayOfBirthDate = format.parseStrict(myControllerDate.text);
+
+      print(dayOfBirthDate.toString());
+
+      newOffer = {
+        "id": "1",
+        "category_id": "1",
+        "user_id": "1",
+        "title": myControllerName.text,
+        "description": myControllerDescription.text,
+        "image": image1,
+        "closed": false,
+        "end_date": myControllerDate.text,
+        "created_at": todaydate.toString(),
+        "closed_at": null
+      };
+
+      print("this is the final offer" + newOffer.toString());
+
+      globals.pathImages.clear();
+
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MyOffers()));
+    } catch (error) {
+      print("error in format");
+      AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+        backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+        // Retrieve the text that the user has entered by using the
+        // TextEditingController.
+        content: const Text("The entered date is not in the correct format"),
+      );
+    }
+  }
 
   // Builds the container of the picture. Its a button, so when clicked you can take a picture.
   Widget pictureButton() {
