@@ -131,3 +131,32 @@ final List<Map<String, dynamic>> my_messages = [
 ];
 
 List<String> pathImages = [];
+
+final List<Map<String, dynamic>> favoriteOffers = [
+  {
+    "id": "2",
+    "category_id": "1",
+    "user_id": "1",
+    "title": "Half kg of lemons",
+    "description": "Hello world! I come from global variables daaata",
+    "image":
+        "https://post.healthline.com/wp-content/uploads/2020/09/lemon-health-benefits-1200x628-facebook-1200x628.jpg",
+    "closed": false,
+    "end_date": "23-03-2022",
+    "created_at": "20-02-2022",
+    "closed_at": null
+  },
+  {
+    "id": "3",
+    "category_id": "1",
+    "user_id": "1",
+    "title": "Watermelon",
+    "description": "Hello world! I come from global variables daaata",
+    "image":
+        "https://i0.wp.com/post.healthline.com/wp-content/uploads/2021/11/watermelon-1296x728-header-1.jpg?w=1155&h=1528",
+    "closed": false,
+    "end_date": "23-03-2022",
+    "created_at": "20-02-2022",
+    "closed_at": null
+  }
+];

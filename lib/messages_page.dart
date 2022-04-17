@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment2/favorites_page.dart';
 import 'package:flutter_assignment2/home_page.dart';
 import 'package:flutter_assignment2/message.dart';
 import 'package:flutter_assignment2/my_offers.dart';
@@ -64,7 +65,14 @@ class _MessagesPage extends State<MessagesPage> {
               Expanded(
                   //favorite items
                   child: IconButton(
-                      icon: const Icon(Icons.favorite), onPressed: () {})),
+                      icon: const Icon(Icons.favorite),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FavoritesPage()),
+                        );
+                      })),
               Expanded(
                 //my offers
                 child: IconButton(
