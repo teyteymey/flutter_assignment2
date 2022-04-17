@@ -49,6 +49,7 @@ class _PostOffer extends State<PostOffer> {
     Map<String, dynamic> newOffer;
     try {
       //check if best before date is correct
+      //todo: check if date is posterior to today
 
       DateFormat format = DateFormat("dd/MM/yyyy");
 
@@ -57,9 +58,11 @@ class _PostOffer extends State<PostOffer> {
 
       print(todaydate);
 
-      DateTime dayOfBirthDate = format.parseStrict(myControllerDate.text);
+      DateTime bestbefore = format.parseStrict(myControllerDate.text);
 
-      print(dayOfBirthDate.toString());
+      print(bestbefore.toString());
+
+      if (bestbefore.isBefore(now)) throw Exception;
 
       newOffer = {
         "id": "1",
@@ -69,7 +72,7 @@ class _PostOffer extends State<PostOffer> {
         "description": myControllerDescription.text,
         "image": image1,
         "closed": false,
-        "end_date": myControllerDate.text,
+        "end_date": bestbefore.toString(),
         "created_at": todaydate.toString(),
         "closed_at": null
       };
@@ -82,15 +85,26 @@ class _PostOffer extends State<PostOffer> {
           context, MaterialPageRoute(builder: (context) => const MyOffers()));
     } catch (error) {
       print("error in format");
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0)), //make alert rounded
-        backgroundColor: const Color.fromARGB(237, 244, 242, 221),
-        // Retrieve the text that the user has entered by using the
-        // TextEditingController.
-        content: const Text("The entered date is not in the correct format"),
-      );
+      _showErrorInDateFormat();
     }
+  }
+
+  Future<void> _showErrorInDateFormat() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+          backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+          // Retrieve the text that the user has entered by using the
+          // TextEditingController.
+          content: const Text(
+              "The entered date is not in the correct format or is before today"),
+        );
+      },
+    );
   }
 
   // Builds the container of the picture. Its a button, so when clicked you can take a picture.
