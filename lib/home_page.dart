@@ -14,6 +14,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Icon customIcon = const Icon(Icons.search);
+  Widget customSearchBar = const Text('Offers near you');
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called,.
@@ -21,16 +23,54 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          title: customSearchBar,
+          actions: [
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  if (customIcon.icon == Icons.search) {
+                    customIcon = const Icon(Icons.cancel);
+                    customSearchBar = const ListTile(
+                      leading: Icon(
+                        Icons.search,
+                        color: const Color(0xFF2A8600),
+                        size: 28,
+                      ),
+                      title: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'search for specific word',
+                          hintStyle: TextStyle(
+                            color: const Color(0xFF2A8600),
+                            fontSize: 18,
+                            fontStyle: FontStyle.italic,
+                          ),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          color: const Color(0xFF2A8600),
+                        ),
+                      ),
+                    );
+                  } else {
+                    customIcon = const Icon(Icons.search);
+                    customSearchBar = const Text('My Personal Journal');
+                  }
+                });
+              },
+              icon: customIcon,
+            )
+          ],
           centerTitle: true,
-          title: const Text(
-            'Offers near you',
-            textAlign: TextAlign.center,
-          ),
+          // title: const Text(
+          //   'Offers near you',
+          //   textAlign: TextAlign.center,
+          // ),
           backgroundColor: const Color(0xFFF4F2DD),
         ),
         //backgroundColor: const Color(0xFFF4F2DD),
