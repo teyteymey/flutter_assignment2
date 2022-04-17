@@ -17,6 +17,7 @@ class _LoginPage extends State<LoginPage> {
   final myControllerPassword = TextEditingController();
 
   //TODO: create call to api
+  // this method validates the inserted data and logins to the account
   void validateLogin() {}
 
   @override

@@ -89,6 +89,7 @@ class _PostOffer extends State<PostOffer> {
     }
   }
 
+  // shows a dialog when the format in the date inserted is not correct
   Future<void> _showErrorInDateFormat() async {
     return showDialog<void>(
       context: context,
@@ -150,6 +151,7 @@ class _PostOffer extends State<PostOffer> {
     );
   }
 
+  // not used, but it displays a calendar to pick a date
   Future<void> datePicker() async {
     newDate = await showDatePicker(
       context: context,
