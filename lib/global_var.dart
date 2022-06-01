@@ -18,7 +18,7 @@ final List<Map<String, dynamic>> friends = [
     "name": "Max",
     "location": "Deventer",
     "picture":
-        "https://media-exp1.licdn.com/dms/image/C4E03AQFNGTHPmKwtpg/profile-displayphoto-shrink_200_200/0/1636835948163?e=1652313600&v=beta&t=tKw-Eu_L_Y-zP5XpFuAAujKUCkNgQ_pof41Ch6DYXuU"
+        "https://images0.persgroep.net/rcs/ub78m45gfbPeMDoNzkPzKs_jM5Y/diocontent/166136003/_fitwidth/694/?appId=21791a8992982cd8da851550a453bd7f&quality=0.8"
   },
   {
     "id": "1",
@@ -108,7 +108,7 @@ final List<Map<String, dynamic>> my_messages = [
     "offerId": "1",
     "solicitorName": "Max",
     "imageOfSolicitor":
-        "https://media-exp1.licdn.com/dms/image/C4E03AQFNGTHPmKwtpg/profile-displayphoto-shrink_200_200/0/1636835948163?e=1652313600&v=beta&t=tKw-Eu_L_Y-zP5XpFuAAujKUCkNgQ_pof41Ch6DYXuU",
+        "https://images0.persgroep.net/rcs/ub78m45gfbPeMDoNzkPzKs_jM5Y/diocontent/166136003/_fitwidth/694/?appId=21791a8992982cd8da851550a453bd7f&quality=0.8",
     "imageOfOffer":
         "https://www.nipponexpress.com/press/report/img/06-Nov-20-ogp.jpeg"
   },
