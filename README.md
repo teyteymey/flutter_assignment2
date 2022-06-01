@@ -10,4 +10,11 @@ For running this application, you will need to have installed Flutter and add it
 If there is any problem, run in terminal the command: flutter doctor
 When you clone the project, I suggest using VS code and opening the project there. You will need to install the Flutter and Dart extensions.
 
+To run this project, firstly it is needed to run:
+    'flutter pub get'
+to install the dependencies.
+
+Then, in VS Code for example, we can run it from the main.dart file. I recommend using a physical device to debug the application.
+
+
 This is a good tutorial: https://rushalisarkar.medium.com/complete-flutter-set-up-in-vs-code-57df49adae21
