@@ -1,0 +1,102 @@
+@startuml uml1
+set namespaceSeparator ::
+
+class "flutter_assignment2::components::message.dart::Message" {
+  +String imageOfOffer
+  +String imageOfSolicitor
+  +String solicitorName
+  +String offerId
+  +void acceptOffer()
+  +void declineOffer()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_assignment2::components::message.dart::Message"
+
+class "flutter_assignment2::components::offer.dart::Offer" {
+  +String id
+  +String categoryId
+  +String userId
+  +String title
+  +String description
+  +String image
+  +bool closed
+  +String endDate
+  +String createdAt
+  +String closedAt
+  +String distance
+  +Map<String, dynamic> offerDetailsMap
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_assignment2::components::offer.dart::Offer"
+
+class "flutter_assignment2::components::take_picture.dart::TakePictureScreen" {        
+  +CameraDescription camera
+  +TakePictureScreenState createState()
+}
+
+"flutter_assignment2::components::take_picture.dart::TakePictureScreen" o-- "camera_platform_interface::src::types::camera_description.dart::CameraDescription"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::components::take_picture.dart::TakePictureScreen"
+
+class "flutter_assignment2::components::take_picture.dart::TakePictureScreenState" {   
+  -CameraController _controller
+  -Future<void> _initializeControllerFuture
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"flutter_assignment2::components::take_picture.dart::TakePictureScreenState" o-- "camera::src::camera_controller.dart::CameraController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::components::take_picture.dart::TakePictureScreenState"
+
+class "flutter_assignment2::components::take_picture.dart::DisplayPictureScreen" {     
+  +String imagePath
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_assignment2::components::take_picture.dart::DisplayPictureScreen"
+
+class "flutter_assignment2::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_assignment2::main.dart::MyApp"
+
+class "flutter_assignment2::main.dart::LogoPage" {
+  +String title
+  +State<LogoPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::main.dart::LogoPage"
+
+class "flutter_assignment2::main.dart::_LogoPage" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::main.dart::_LogoPage"
+
+class "flutter_assignment2::pages::favorites_page.dart::FavoritesPage" {
+  +State<FavoritesPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::favorites_page.dart::FavoritesPage"
+
+class "flutter_assignment2::pages::favorites_page.dart::_FavoritesPageState" {
+  +Widget customSearchBar
+  +List<Map<String, dynamic>> favoriteOffers
+  +void getFavoriteOffers()
+  +Widget build()
+}
+
+"flutter_assignment2::pages::favorites_page.dart::_FavoritesPageState" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::favorites_page.dart::_FavoritesPageState"
+
+class "flutter_assignment2::pages::home_page.dart::MyHomePage" {
+  +State<MyHomePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::home_page.dart::MyHomePage"
+
+@enduml

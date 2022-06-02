@@ -1,0 +1,88 @@
+@startuml uml2
+set namespaceSeparator ::
+
+class "flutter_assignment2::pages::home_page.dart::_MyHomePageState" {
+  +Icon customIcon
+  +Widget customSearchBar
+  +List<Map<String, dynamic>> offers
+  +void getOffers()
+  +Widget build()
+}
+
+"flutter_assignment2::pages::home_page.dart::_MyHomePageState" o-- "flutter::src::widgets::icon.dart::Icon"
+"flutter_assignment2::pages::home_page.dart::_MyHomePageState" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::home_page.dart::_MyHomePageState"
+
+class "flutter_assignment2::pages::login_page.dart::LoginPage" {
+  +State<LoginPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::login_page.dart::LoginPage"
+
+class "flutter_assignment2::pages::login_page.dart::_LoginPage" {
+  +TextEditingController myControllerUsername
+  +TextEditingController myControllerPassword
+  +Future<void> validateLogin()
+  +Widget build()
+}
+
+"flutter_assignment2::pages::login_page.dart::_LoginPage" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::login_page.dart::_LoginPage"
+
+class "flutter_assignment2::pages::messages_page.dart::MessagesPage" {
+  +State<MessagesPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::messages_page.dart::MessagesPage"
+
+class "flutter_assignment2::pages::messages_page.dart::_MessagesPage" {
+  +Map<String, dynamic> userDetails
+  +List<Map<String, String>> myMessages
+  +void getMessages()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::messages_page.dart::_MessagesPage"
+
+class "flutter_assignment2::pages::my_offers_page.dart::MyOffers" {
+  +State<MyOffers> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::my_offers_page.dart::MyOffers"
+
+class "flutter_assignment2::pages::my_offers_page.dart::_MyOffers" {
+  +Map<String, dynamic> userDetails
+  +List<Map<String, dynamic>> myOffers
+  +void getFavoriteOffers()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::my_offers_page.dart::_MyOffers"
+
+class "flutter_assignment2::pages::offer_details_page.dart::OfferDetails" {
+  +Map<String, dynamic> offerDetailsMap
+  +State<OfferDetails> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::offer_details_page.dart::OfferDetails"
+
+class "flutter_assignment2::pages::offer_details_page.dart::_OfferDetails" {
+  +Map<String, dynamic> offerDetails
+  +String title
+  +String best_before
+  +String distance
+  +String image
+  +String city
+  +String description
+  +bool reserved
+  +Future<void> reserve()
+  +void cancelReservation()
+  -Future<void> _showReservationConfirmationDialog()
+  -Future<void> _showAnimationOfReservationDialog()
+  +Widget navBar()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::offer_details_page.dart::_OfferDetails"
+
+@enduml

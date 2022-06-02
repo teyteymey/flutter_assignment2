@@ -22,7 +22,7 @@ class MessagesPage extends StatefulWidget {
 // this class builds the details of a certain offer
 class _MessagesPage extends State<MessagesPage> {
   //Atributes
-  Map<String, dynamic> userDetails = {};
+  //Map<String, dynamic> userDetails = {};
   List<Map<String, String>> myMessages = [];
 
   _MessagesPage() {

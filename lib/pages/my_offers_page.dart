@@ -24,10 +24,10 @@ class _MyOffers extends State<MyOffers> {
   List<Map<String, dynamic>> myOffers = [];
 
   _MyOffers() {
-    getFavoriteOffers();
+    getMyOffers();
   }
 
-  void getFavoriteOffers() async {
+  void getMyOffers() async {
     final response = await http.get(
         Uri.parse('http://10.0.2.2:8000//user/offers/'),
         headers: <String, String>{

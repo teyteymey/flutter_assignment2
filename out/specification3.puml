@@ -1,0 +1,62 @@
+@startuml uml3
+set namespaceSeparator ::
+class "flutter_assignment2::pages::post_offer_page.dart::PostOffer" {
+  +State<PostOffer> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::post_offer_page.dart::PostOffer"
+
+class "flutter_assignment2::pages::post_offer_page.dart::_PostOffer" {
+  +TextEditingController myControllerName
+  +TextEditingController myControllerDescription
+  +TextEditingController myControllerDate
+  +DateTime? newDate
+  +String image1
+  +String image2
+  +String image3
+  +String image4
+  +void postOffer()
+  +void validateOffer()
+  -Future<void> _showErrorInDateFormat()
+  +Widget pictureButton()
+  +Widget imageContainer()
+  +Future<void> datePicker()
+  +Widget build()
+}
+
+"flutter_assignment2::pages::post_offer_page.dart::_PostOffer" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::post_offer_page.dart::_PostOffer"
+
+class "flutter_assignment2::pages::profile_page.dart::ProfilePage" {
+  +State<ProfilePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::profile_page.dart::ProfilePage"
+
+class "flutter_assignment2::pages::profile_page.dart::_ProfilePage" {
+  +Map<String, dynamic> userDetails
+  +List<Map<String, dynamic>> friends
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::profile_page.dart::_ProfilePage"
+
+class "flutter_assignment2::pages::register_page.dart::RegisterPage" {
+  +State<RegisterPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_assignment2::pages::register_page.dart::RegisterPage"
+
+class "flutter_assignment2::pages::register_page.dart::_RegisterPage" {
+  +TextEditingController myControllerUsername
+  +TextEditingController myControllerPassword
+  +TextEditingController myControllerPassword2
+  +Future<void> validateSignUp()
+  +Widget build()
+}
+
+"flutter_assignment2::pages::register_page.dart::_RegisterPage" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_assignment2::pages::register_page.dart::_RegisterPage"
+
+
+@enduml
