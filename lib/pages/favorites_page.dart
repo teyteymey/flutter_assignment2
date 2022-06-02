@@ -6,6 +6,8 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'home_page.dart';
 import '../components/offer.dart';
 import '../global_var.dart' as globals;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({Key? key}) : super(key: key);
@@ -17,6 +19,34 @@ class FavoritesPage extends StatefulWidget {
 // I cant implement the method to add favorites because I need the api for that.
 class _FavoritesPageState extends State<FavoritesPage> {
   Widget customSearchBar = const Text('Favorite offers');
+  List<Map<String, dynamic>> favoriteOffers = [];
+
+  void getFavoriteOffers() async {
+    final response = await http.get(
+        Uri.parse('http://10.0.2.2:8000//user/favorite_offers/'),
+        headers: <String, String>{
+          'Authorization': 'Bearer ' + globals.accessToken,
+        });
+
+    if (response.statusCode == 200) {
+      favoriteOffers = jsonDecode(response.body);
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content: const Text("Failed to get favorite offers."),
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called
@@ -40,7 +70,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in globals.favoriteOffers) Offer.fromMap(i)
+              for (var i in favoriteOffers) Offer.fromMap(i)
             ], // for each offer, we create and display a card
           ),
         ),

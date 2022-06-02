@@ -1,5 +1,8 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../global_var.dart' as globals;
 
 Widget userCard(Map<String, dynamic> userDetails) {
   return Card(
@@ -26,4 +29,19 @@ Widget userCard(Map<String, dynamic> userDetails) {
       ],
     ),
   );
+}
+
+Future<String> getNameUserById(String id) async {
+  final responseUser = await http.get(
+      Uri.parse('http://10.0.2.2:8000/user/' + id + '/'),
+      headers: <String, String>{
+        'Authorization': 'Bearer ' + globals.accessToken,
+      });
+
+  if (responseUser.statusCode == 200) {
+    final data = jsonDecode(responseUser.body);
+    return data['first_name'];
+  } else {
+    throw Exception('Failed to get user.');
+  }
 }

@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/pages/home_page.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_assignment2/global_var.dart' as globals;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -16,6 +20,43 @@ class _RegisterPage extends State<RegisterPage> {
   final myControllerUsername = TextEditingController();
   final myControllerPassword = TextEditingController();
   final myControllerPassword2 = TextEditingController();
+
+  Future<void> validateSignUp() async {
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8000/register/'),
+      body: jsonEncode(<String, String>{
+        'username': myControllerUsername.toString(),
+        'password1': myControllerPassword.toString(),
+        'password2': myControllerPassword.toString(),
+        'first_name': 'default',
+        'last_name': 'default',
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      globals.accessToken = data['access_token'];
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content: const Text(
+                "There has been an error, wait some time and try again"),
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

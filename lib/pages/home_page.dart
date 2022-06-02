@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Map<String, dynamic>> offers = [];
 
   void getOffers() async {
-    final response = await http.post(Uri.parse('http://127.0.0.1:8000/offers'),
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/offers'),
         headers: <String, String>{
           'Authorization': 'Bearer ' + globals.accessToken,
         });
@@ -31,9 +31,19 @@ class _MyHomePageState extends State<MyHomePage> {
     if (response.statusCode == 200) {
       offers = jsonDecode(response.body);
     } else {
-      // If the server did not return a 201 CREATED response,
-      // then throw an exception.
-      throw Exception('Failed to get offers.');
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content: const Text("Failed to get offers."),
+          );
+        },
+      );
     }
   }
 

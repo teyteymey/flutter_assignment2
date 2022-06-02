@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/pages/home_page.dart';
 import 'package:flutter_assignment2/pages/register_page.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter_assignment2/global_var.dart' as globals;
 
 class LoginPage extends StatefulWidget {
@@ -23,10 +22,7 @@ class _LoginPage extends State<LoginPage> {
   // this method validates the inserted data and logins to the account
   Future<void> validateLogin() async {
     final response = await http.post(
-      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      Uri.parse('http://10.0.2.2:8000/login'),
       body: jsonEncode(<String, String>{
         'username': myControllerUsername.toString(),
         'password': myControllerPassword.toString(),

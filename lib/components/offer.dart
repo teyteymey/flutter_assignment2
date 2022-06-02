@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/pages/offer_details_page.dart';
 import '../pages/offer_details_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../global_var.dart' as globals;
 
 // Returns all the objects offered in a certain area formatted as cards
 class Offer extends StatelessWidget {
@@ -95,5 +98,20 @@ class Offer extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<String> getPictureOfferById(String id) async {
+  final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/offer/' + id + '/'),
+      headers: <String, String>{
+        'Authorization': 'Bearer ' + globals.accessToken,
+      });
+
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    return data['image'];
+  } else {
+    throw Exception('Failed to offer.');
   }
 }
