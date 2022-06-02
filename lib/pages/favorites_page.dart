@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/favorites_page.dart';
-import 'package:flutter_assignment2/home_page.dart';
-import 'package:flutter_assignment2/messages_page.dart';
-import 'package:flutter_assignment2/post_offer.dart';
-import 'package:flutter_assignment2/profile_page.dart';
-import 'offer.dart';
-import 'global_var.dart' as globals;
+import 'package:flutter_assignment2/pages/messages_page.dart';
+import 'package:flutter_assignment2/pages/my_offers_page.dart';
+import 'package:flutter_assignment2/pages/profile_page.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
+import 'home_page.dart';
+import '../components/offer.dart';
+import '../global_var.dart' as globals;
 
-class MyOffers extends StatefulWidget {
-  const MyOffers({Key? key}) : super(key: key);
+class FavoritesPage extends StatefulWidget {
+  const FavoritesPage({Key? key}) : super(key: key);
 
   @override
-  State<MyOffers> createState() => _MyOffers();
+  State<FavoritesPage> createState() => _FavoritesPageState();
 }
 
-// this class builds the details of a certain offer
-class _MyOffers extends State<MyOffers> {
-  //Atributes
-  Map<String, dynamic> userDetails = {};
-
+// I cant implement the method to add favorites because I need the api for that.
+class _FavoritesPageState extends State<FavoritesPage> {
+  Widget customSearchBar = const Text('Favorite offers');
   @override
   Widget build(BuildContext context) {
+    // This method is rerun every time setState is called
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          title: customSearchBar,
+
           centerTitle: true,
-          title: const Text(
-            'Your offers',
-            textAlign: TextAlign.center,
-          ),
+          // title: const Text(
+          //   'Offers near you',
+          //   textAlign: TextAlign.center,
+          // ),
           backgroundColor: const Color(0xFFF4F2DD),
         ),
         //backgroundColor: const Color(0xFFF4F2DD),
@@ -40,20 +40,9 @@ class _MyOffers extends State<MyOffers> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in globals.myoffers) Offer.fromMap(i)
+              for (var i in globals.favoriteOffers) Offer.fromMap(i)
             ], // for each offer, we create and display a card
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color.fromARGB(255, 42, 134, 0),
-          foregroundColor: Colors.white,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const PostOffer()),
-            );
-          },
-          child: const Icon(Icons.add),
         ),
         bottomNavigationBar: BottomAppBar(
           color: const Color(0xFFF9F9F9),
@@ -61,7 +50,7 @@ class _MyOffers extends State<MyOffers> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                  //explore page
+                  //explore button
                   child: IconButton(
                 icon: const Icon(Icons.travel_explore),
                 onPressed: () {
@@ -74,20 +63,20 @@ class _MyOffers extends State<MyOffers> {
               Expanded(
                   //favorite items
                   child: IconButton(
-                      icon: const Icon(Icons.favorite),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FavoritesPage()),
-                        );
-                      })),
+                      icon: const Icon(Icons.favorite,
+                          color: const Color(0xFF2A8600)),
+                      onPressed: () {})),
               Expanded(
                 //my offers
                 child: IconButton(
-                    icon: const Icon(FontAwesome.food,
-                        color: const Color(0xFF2A8600)),
-                    onPressed: () {}), //in this case do nothing bc we are here
+                    icon: const Icon(FontAwesome.food),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MyOffers()),
+                      );
+                    }),
               ),
               Expanded(
                   //messages

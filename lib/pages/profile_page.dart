@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/favorites_page.dart';
-import 'package:flutter_assignment2/home_page.dart';
-import 'package:flutter_assignment2/messages_page.dart';
-import 'package:flutter_assignment2/my_offers.dart';
-import 'user.dart';
+import 'package:flutter_assignment2/pages/favorites_page.dart';
+import 'package:flutter_assignment2/pages/home_page.dart';
+import 'package:flutter_assignment2/pages/messages_page.dart';
+import 'package:flutter_assignment2/pages/my_offers_page.dart';
+import '../components/user.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'global_var.dart' as globals;
+import '../global_var.dart' as globals;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);

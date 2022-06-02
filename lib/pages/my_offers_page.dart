@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/favorites_page.dart';
-import 'package:flutter_assignment2/home_page.dart';
-import 'package:flutter_assignment2/message.dart';
-import 'package:flutter_assignment2/my_offers.dart';
-import 'package:flutter_assignment2/profile_page.dart';
-import 'offer.dart';
-import 'global_var.dart' as globals;
+import 'package:flutter_assignment2/pages/favorites_page.dart';
+import 'package:flutter_assignment2/pages/home_page.dart';
+import 'package:flutter_assignment2/pages/messages_page.dart';
+import 'package:flutter_assignment2/pages/post_offer_page.dart';
+import 'package:flutter_assignment2/pages/profile_page.dart';
+import '../components/offer.dart';
+import '../global_var.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
 
-class MessagesPage extends StatefulWidget {
-  const MessagesPage({Key? key}) : super(key: key);
+class MyOffers extends StatefulWidget {
+  const MyOffers({Key? key}) : super(key: key);
 
   @override
-  State<MessagesPage> createState() => _MessagesPage();
+  State<MyOffers> createState() => _MyOffers();
 }
 
 // this class builds the details of a certain offer
-class _MessagesPage extends State<MessagesPage> {
+class _MyOffers extends State<MyOffers> {
   //Atributes
   Map<String, dynamic> userDetails = {};
 
@@ -29,7 +29,7 @@ class _MessagesPage extends State<MessagesPage> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: const Text(
-            'Your messages',
+            'Your offers',
             textAlign: TextAlign.center,
           ),
           backgroundColor: const Color(0xFFF4F2DD),
@@ -40,11 +40,20 @@ class _MessagesPage extends State<MessagesPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              const Padding(
-                  padding: EdgeInsets.only(top: 10)), // separation form the top
-              for (var i in globals.my_messages) Message.fromMap(i)
+              for (var i in globals.myoffers) Offer.fromMap(i)
             ], // for each offer, we create and display a card
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 42, 134, 0),
+          foregroundColor: Colors.white,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PostOffer()),
+            );
+          },
+          child: const Icon(Icons.add),
         ),
         bottomNavigationBar: BottomAppBar(
           color: const Color(0xFFF9F9F9),
@@ -76,21 +85,21 @@ class _MessagesPage extends State<MessagesPage> {
               Expanded(
                 //my offers
                 child: IconButton(
-                    icon: const Icon(FontAwesome.food),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MyOffers()),
-                      );
-                    }),
+                    icon: const Icon(FontAwesome.food,
+                        color: const Color(0xFF2A8600)),
+                    onPressed: () {}), //in this case do nothing bc we are here
               ),
               Expanded(
                   //messages
                   child: IconButton(
-                      icon: const Icon(Icons.mail,
-                          color: const Color(0xFF2A8600)),
-                      onPressed: () {})),
+                      icon: const Icon(Icons.mail),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MessagesPage()),
+                        );
+                      })),
               Expanded(
                   //my profile
                   child: IconButton(

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/offer_details.dart';
-import 'offer_details.dart';
 
 // Returns all the objects offered in a certain area formatted as cards
 // ignore: must_be_immutable

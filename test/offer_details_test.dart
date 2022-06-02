@@ -1,4 +1,4 @@
-import 'package:flutter_assignment2/offer_details.dart';
+import 'package:flutter_assignment2/pages/offer_details_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

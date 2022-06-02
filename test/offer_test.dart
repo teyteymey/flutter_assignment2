@@ -1,4 +1,4 @@
-import 'package:flutter_assignment2/offer.dart';
+import 'package:flutter_assignment2/components/offer.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

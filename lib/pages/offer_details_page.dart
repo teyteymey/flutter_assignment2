@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'user.dart';
-import 'global_var.dart' as globals;
+import '../components/user.dart';
+import '../global_var.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
 

@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/post_offer.dart';
-import 'global_var.dart' as globals;
+import 'package:flutter_assignment2/pages/post_offer_page.dart';
+import '../global_var.dart' as globals;
 
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {

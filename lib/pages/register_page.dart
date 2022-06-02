@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/home_page.dart';
+import 'package:flutter_assignment2/pages/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);

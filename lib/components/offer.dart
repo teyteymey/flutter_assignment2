@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/offer_details.dart';
-import 'offer_details.dart';
+import 'package:flutter_assignment2/pages/offer_details_page.dart';
+import '../pages/offer_details_page.dart';
 
 // Returns all the objects offered in a certain area formatted as cards
-// ignore: must_be_immutable
 class Offer extends StatelessWidget {
   String id = "-1";
   String categoryId = "-1";

@@ -2,12 +2,11 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/my_offers.dart';
-import 'take_picture.dart';
-import 'global_var.dart' as globals;
+import 'package:flutter_assignment2/pages/my_offers_page.dart';
+import '../components/take_picture.dart';
+import '../global_var.dart' as globals;
 import 'package:camera/camera.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class PostOffer extends StatefulWidget {
   const PostOffer({Key? key}) : super(key: key);

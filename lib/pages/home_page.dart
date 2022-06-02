@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment2/favorites_page.dart';
-import 'package:flutter_assignment2/messages_page.dart';
-import 'package:flutter_assignment2/my_offers.dart';
-import 'package:flutter_assignment2/profile_page.dart';
+import 'package:flutter_assignment2/pages/favorites_page.dart';
+import 'package:flutter_assignment2/pages/messages_page.dart';
+import 'package:flutter_assignment2/pages/my_offers_page.dart';
+import 'package:flutter_assignment2/pages/profile_page.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'offer.dart';
-import 'global_var.dart' as globals;
+import '../components/offer.dart';
+import '../global_var.dart' as globals;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
