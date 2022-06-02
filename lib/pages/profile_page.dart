@@ -6,6 +6,8 @@ import 'package:flutter_assignment2/pages/my_offers_page.dart';
 import '../components/user.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import '../global_var.dart' as globals;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);

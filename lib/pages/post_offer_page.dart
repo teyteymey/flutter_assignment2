@@ -7,6 +7,8 @@ import '../components/take_picture.dart';
 import '../global_var.dart' as globals;
 import 'package:camera/camera.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PostOffer extends StatefulWidget {
   const PostOffer({Key? key}) : super(key: key);
@@ -37,12 +39,39 @@ class _PostOffer extends State<PostOffer> {
     if (size >= 4) image4 = globals.pathImages[3];
   }
 
-  // _PostOffer(
-  //     [this.image1 = "", this.image2 = "", this.image3 = "", this.image4 = ""]);
+  void postOffer(
+      String title, String description, String image, String end_date) async {
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8000/offers/'),
+      body: jsonEncode(<String, String>{
+        "category_id": "1",
+        "title": title,
+        "description": description,
+        "image": image,
+        "end_date": end_date
+      }),
+    );
 
-  //TODO: since in this case the api is not ready, i can not add it to the offers because this image is in local files
-  // and it should be in the network.
-  // the path would not work to display the offer so I am not adding it yet.
+    if (response.statusCode != 201) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content: const Text("Failed to get user offers."),
+          );
+        },
+      );
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MyOffers()));
+    }
+  }
+
   // This method gathers all the information and sends a request to the api with the info of the new offer.
   void validateOffer() {
     Map<String, dynamic> newOffer;
@@ -55,11 +84,7 @@ class _PostOffer extends State<PostOffer> {
       DateTime now = DateTime.now();
       String todaydate = format.format(now);
 
-      print(todaydate);
-
       DateTime bestbefore = format.parseStrict(myControllerDate.text);
-
-      print(bestbefore.toString());
 
       if (bestbefore.isBefore(now)) throw Exception;
 
@@ -76,12 +101,10 @@ class _PostOffer extends State<PostOffer> {
         "closed_at": null
       };
 
-      print("this is the final offer" + newOffer.toString());
-
       globals.pathImages.clear();
 
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const MyOffers()));
+      postOffer(myControllerName.text, myControllerDescription.text, image1,
+          bestbefore.toString());
     } catch (error) {
       print("error in format");
       _showErrorInDateFormat();

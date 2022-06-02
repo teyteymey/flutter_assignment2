@@ -7,6 +7,8 @@ import 'package:flutter_assignment2/pages/profile_page.dart';
 import '../components/offer.dart';
 import '../global_var.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MyOffers extends StatefulWidget {
   const MyOffers({Key? key}) : super(key: key);
@@ -19,6 +21,37 @@ class MyOffers extends StatefulWidget {
 class _MyOffers extends State<MyOffers> {
   //Atributes
   Map<String, dynamic> userDetails = {};
+  List<Map<String, dynamic>> myOffers = [];
+
+  _MyOffers() {
+    getFavoriteOffers();
+  }
+
+  void getFavoriteOffers() async {
+    final response = await http.get(
+        Uri.parse('http://10.0.2.2:8000//user/offers/'),
+        headers: <String, String>{
+          'Authorization': 'Bearer ' + globals.accessToken,
+        });
+
+    if (response.statusCode == 200) {
+      myOffers = jsonDecode(response.body);
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content: const Text("Failed to get user offers."),
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +73,7 @@ class _MyOffers extends State<MyOffers> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in globals.myoffers) Offer.fromMap(i)
+              for (var i in myOffers) Offer.fromMap(i)
             ], // for each offer, we create and display a card
           ),
         ),

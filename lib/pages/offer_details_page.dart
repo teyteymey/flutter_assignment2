@@ -5,15 +5,15 @@ import '../components/user.dart';
 import '../global_var.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-// ignore: must_be_immutable
 class OfferDetails extends StatefulWidget {
   Map<String, dynamic> offerDetailsMap = {};
 
   OfferDetails(this.offerDetailsMap, {Key? key}) : super(key: key);
 
   @override
-  // ignore: no_logic_in_create_state
   State<OfferDetails> createState() => _OfferDetails(offerDetailsMap);
 }
 
@@ -22,7 +22,6 @@ class _OfferDetails extends State<OfferDetails> {
   // ATTRIBUTES
   Map<String, dynamic> offerDetails = {};
   String title = "default";
-  // ignore: non_constant_identifier_names
   String best_before = "default";
   String distance = "default";
   //default image
@@ -42,21 +41,45 @@ class _OfferDetails extends State<OfferDetails> {
     image = offerDetails["image"];
     description = offerDetails["description"];
     reserved = false; //default
-    checkIfReserved(); //todo: check if reserved or not
+    //checkIfReserved(); //todo: check if reserved or not
   }
 
-  //TODO: reservation to API
-  void reserve() {
-    //todo -> call to backend
-    _showReservationConfirmationDialog();
+  //Send a reservation request to the API
+  Future<void> reserve() async {
+    final response =
+        await http.post(Uri.parse('http://10.0.2.2:8000/reservations/'),
+            headers: <String, String>{
+              'Authorization': 'Bearer ' + globals.accessToken,
+            },
+            body: jsonEncode(
+              <String, String>{'offer_id': offerDetails["id"]},
+            ));
+
+    if (response.statusCode == 200) {
+      _showReservationConfirmationDialog();
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content: const Text("Failed to reserve."),
+          );
+        },
+      );
+    }
+    //_showReservationConfirmationDialog();
   }
 
-  //TODO
   void cancelReservation() {}
 
-  //TODO: need to check if this item is already reserved by the active user to
-  //show the corresponding navigation bar (reserve or cancel reservation)
-  void checkIfReserved() {}
+  // //todo: need to check if this item is already reserved by the active user to
+  // //show the corresponding navigation bar (reserve or cancel reservation)
+  // void checkIfReserved() {}
 
   // shows the reservation confirmation
   Future<void> _showReservationConfirmationDialog() async {

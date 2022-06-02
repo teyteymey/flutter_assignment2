@@ -22,6 +22,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget customSearchBar = const Text('Offers near you');
   List<Map<String, dynamic>> offers = [];
 
+  _MyHomePageState() {
+    getOffers();
+  }
+
   void getOffers() async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8000/offers'),
         headers: <String, String>{

@@ -21,6 +21,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget customSearchBar = const Text('Favorite offers');
   List<Map<String, dynamic>> favoriteOffers = [];
 
+  _FavoritesPageState() {
+    getFavoriteOffers();
+  }
+
   void getFavoriteOffers() async {
     final response = await http.get(
         Uri.parse('http://10.0.2.2:8000//user/favorite_offers/'),

@@ -23,7 +23,11 @@ class MessagesPage extends StatefulWidget {
 class _MessagesPage extends State<MessagesPage> {
   //Atributes
   Map<String, dynamic> userDetails = {};
-  List<Map<String, String>> my_messages = [];
+  List<Map<String, String>> myMessages = [];
+
+  _MessagesPage() {
+    getMessages();
+  }
 
   void getMessages() async {
     final response = await http.get(
@@ -48,7 +52,7 @@ class _MessagesPage extends State<MessagesPage> {
         aux["imageOfSolicitor"] = imageUser;
         aux["imageOfOffer"] = imageOffer as String;
 
-        my_messages.add(aux);
+        myMessages.add(aux);
       }
     } else {
       throw Exception('Failed to get requests.');
@@ -77,7 +81,7 @@ class _MessagesPage extends State<MessagesPage> {
             children: <Widget>[
               const Padding(
                   padding: EdgeInsets.only(top: 10)), // separation form the top
-              for (var i in my_messages) Message.fromMap(i)
+              for (var i in myMessages) Message.fromMap(i)
             ], // for each offer, we create and display a card
           ),
         ),
