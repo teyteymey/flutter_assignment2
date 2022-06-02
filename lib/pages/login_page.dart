@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/pages/home_page.dart';
 import 'package:flutter_assignment2/pages/register_page.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_assignment2/global_var.dart' as globals;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -16,9 +20,43 @@ class _LoginPage extends State<LoginPage> {
   final myControllerUsername = TextEditingController();
   final myControllerPassword = TextEditingController();
 
-  //TODO: create call to api
   // this method validates the inserted data and logins to the account
-  void validateLogin() {}
+  Future<void> validateLogin() async {
+    final response = await http.post(
+      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': myControllerUsername.toString(),
+        'password': myControllerPassword.toString(),
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      globals.accessToken = data['access_token'];
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content: const Text(
+                "Username or password incorrect.\nIf you do not have an account, you can sign up"),
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,10 +148,6 @@ class _LoginPage extends State<LoginPage> {
                     } else {
                       //todo: implement call to api
                       validateLogin();
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MyHomePage()));
                     }
                   },
                   child: const Text('Login'),

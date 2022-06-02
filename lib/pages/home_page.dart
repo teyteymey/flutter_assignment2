@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/pages/favorites_page.dart';
 import 'package:flutter_assignment2/pages/messages_page.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_assignment2/pages/profile_page.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import '../components/offer.dart';
 import '../global_var.dart' as globals;
+import 'package:http/http.dart' as http;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -17,6 +20,23 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Icon customIcon = const Icon(Icons.search);
   Widget customSearchBar = const Text('Offers near you');
+  List<Map<String, dynamic>> offers = [];
+
+  void getOffers() async {
+    final response = await http.post(Uri.parse('http://127.0.0.1:8000/offers'),
+        headers: <String, String>{
+          'Authorization': 'Bearer ' + globals.accessToken,
+        });
+
+    if (response.statusCode == 200) {
+      offers = jsonDecode(response.body);
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      throw Exception('Failed to get offers.');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called,.
@@ -80,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in globals.allOffers) Offer.fromMap(i)
+              for (var offer in offers) Offer.fromMap(offer)
             ], // for each offer, we create and display a card
           ),
         ),
