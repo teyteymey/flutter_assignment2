@@ -74,7 +74,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in favoriteOffers) Offer.fromMap(i)
+              for (var i in favoriteOffers) Offer.fromJson(i)
             ], // for each offer, we create and display a card
           ),
         ),

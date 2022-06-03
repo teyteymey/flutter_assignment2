@@ -21,15 +21,15 @@ class Offer extends StatelessWidget {
 
   Map<String, dynamic> offerDetailsMap = {};
 
-  // constructor method, sets all the attributes
-  Offer.fromMap(Map<String, dynamic> offerDetails, {Key? key})
-      : super(key: key) {
-    offerDetailsMap = offerDetails;
-    title = offerDetails["title"];
-    endDate = offerDetails["end_date"];
-    distance = "1.5 km"; // todo
-    image = offerDetails["image"];
-  }
+  // // constructor method, sets all the attributes
+  // Offer.fromMap(Map<String, dynamic> offerDetails, {Key? key})
+  //     : super(key: key) {
+  //   offerDetailsMap = offerDetails;
+  //   title = offerDetails["title"];
+  //   endDate = offerDetails["end_date"];
+  //   distance = "1.5 km"; // todo
+  //   image = offerDetails["image"];
+  // }
 
   Offer({
     Key? key,

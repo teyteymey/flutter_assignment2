@@ -24,7 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
   camera:
-  path_provider:
   http: "0.13.4"
 
   

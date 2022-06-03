@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var offer in offers) Offer.fromMap(offer)
+              for (var offer in offers) Offer.fromJson(offer)
             ], // for each offer, we create and display a card
           ),
         ),

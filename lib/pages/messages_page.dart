@@ -5,7 +5,6 @@ import 'package:flutter_assignment2/pages/home_page.dart';
 import 'package:flutter_assignment2/components/message.dart';
 import 'package:flutter_assignment2/pages/my_offers_page.dart';
 import 'package:flutter_assignment2/pages/profile_page.dart';
-import 'package:path_provider/path_provider.dart';
 import '../components/offer.dart';
 import '../global_var.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';

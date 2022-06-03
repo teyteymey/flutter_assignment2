@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment2/pages/messages_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // Returns all the objects offered in a certain area formatted as cards
 // ignore: must_be_immutable
@@ -11,6 +14,7 @@ class Message extends StatelessWidget {
   Message({
     Key? key,
     required this.imageOfOffer,
+    required this.imageOfSolicitor,
     required this.solicitorName,
     required this.offerId,
   }) : super(key: key);
@@ -22,10 +26,66 @@ class Message extends StatelessWidget {
     solicitorName = message["solicitorName"];
     offerId = message["offerId"];
   }
-  //TODO
-  void acceptOffer() {}
-  //TODO
-  void declineOffer() {}
+
+  //Accepts the offer to reserve the product
+  Future<void> acceptOffer(BuildContext context) async {
+    final response = await http.put(
+      Uri.parse('http://10.0.2.2:8000/user/requests/' + offerId + '/'),
+      body: jsonEncode(<String, String>{
+        'accepted': 'True',
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const MessagesPage()));
+    } else {
+      // If the server did not return a 200 response,
+      // then throw an exception.
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            content:
+                const Text("Could not accept. Please retry in some moments."),
+          );
+        },
+      );
+    }
+  }
+
+  //Declines the offer to reserve the product
+  void declineOffer(BuildContext context) async {
+    final response = await http.put(
+      Uri.parse('http://10.0.2.2:8000/user/requests/' + offerId + '/'),
+      body: jsonEncode(<String, String>{
+        'accepted': 'False',
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const MessagesPage()));
+    } else {
+      // If the server did not return a 200 response,
+      // then throw an exception.
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            content:
+                const Text("Could not decline. Please retry in some moments."),
+          );
+        },
+      );
+    }
+  }
 
   @override
   // the container of a card: it is a text button showing image, distance and best before date
@@ -69,13 +129,13 @@ class Message extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      declineOffer();
+                      declineOffer(context);
                     },
                     child: const Text('Decline'),
                   ),
                   TextButton(
                     onPressed: () {
-                      acceptOffer();
+                      acceptOffer(context);
                     },
                     child: const Text(
                       'Accept',
