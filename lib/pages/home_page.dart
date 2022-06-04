@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   } else {
                     customIcon = const Icon(Icons.search);
-                    customSearchBar = const Text('My Personal Journal');
+                    customSearchBar = const Text('Offers near you');
                   }
                 });
               },
