@@ -60,12 +60,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: customSearchBar,
-
           centerTitle: true,
-          // title: const Text(
-          //   'Offers near you',
-          //   textAlign: TextAlign.center,
-          // ),
           backgroundColor: const Color(0xFFF4F2DD),
         ),
         //backgroundColor: const Color(0xFFF4F2DD),
