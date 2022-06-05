@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_assignment2/pages/favorites_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 
 //test to check favorites page
 void main() {
@@ -32,13 +33,16 @@ void main() {
     ));
     ;
 
-    // Create the Finders.
     final navBarFav = find.widgetWithIcon(IconButton, Icons.favorite);
     final navBarHome = find.widgetWithIcon(IconButton, Icons.travel_explore);
+    final navMyOffers = find.widgetWithIcon(IconButton, FontAwesome.food);
+    final navMessages = find.widgetWithIcon(IconButton, Icons.mail);
+    final navProfile = find.widgetWithIcon(IconButton, Icons.person);
 
-    // Use the `findsOneWidget` matcher provided by flutter_test to
-    // verify that the Text widgets appear exactly once in the widget tree.
     expect(navBarFav, findsOneWidget);
     expect(navBarHome, findsOneWidget);
+    expect(navMyOffers, findsOneWidget);
+    expect(navMessages, findsOneWidget);
+    expect(navProfile, findsOneWidget);
   });
 }

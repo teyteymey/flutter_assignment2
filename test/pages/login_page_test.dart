@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_assignment2/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 
 //Class to test the login page
 void main() {
@@ -28,11 +29,17 @@ void main() {
     ));
 
     // Create the Finders.
-    final usernameFormFinder = find.widgetWithText(TextFormField, 'Username');
-    final passwordFormFinder = find.widgetWithText(TextFormField, 'Password');
+    final navBarFav = find.widgetWithIcon(IconButton, Icons.favorite);
+    final navBarHome = find.widgetWithIcon(IconButton, Icons.travel_explore);
+    final navMyOffers = find.widgetWithIcon(IconButton, FontAwesome.food);
+    final navMessages = find.widgetWithIcon(IconButton, Icons.mail);
+    final navProfile = find.widgetWithIcon(IconButton, Icons.person);
 
-    expect(usernameFormFinder, findsOneWidget);
-    expect(passwordFormFinder, findsOneWidget);
+    expect(navBarFav, findsOneWidget);
+    expect(navBarHome, findsOneWidget);
+    expect(navMyOffers, findsOneWidget);
+    expect(navMessages, findsOneWidget);
+    expect(navProfile, findsOneWidget);
   });
 
   //Test the button to sign up loads

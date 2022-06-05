@@ -54,7 +54,20 @@ class _MessagesPage extends State<MessagesPage> {
         myMessages.add(aux);
       }
     } else {
-      throw Exception('Failed to get requests.');
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content:
+                const Text("Failed to get your messages. Try again after."),
+          );
+        },
+      );
     }
   }
 

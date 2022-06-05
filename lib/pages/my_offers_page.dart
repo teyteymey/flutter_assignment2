@@ -29,7 +29,7 @@ class _MyOffers extends State<MyOffers> {
 
   void getMyOffers() async {
     final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000//user/offers/'),
+        Uri.parse('http://10.0.2.2:8000/user/offers/'),
         headers: <String, String>{
           'Authorization': 'Bearer ' + globals.accessToken,
         });
