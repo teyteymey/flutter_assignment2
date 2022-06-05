@@ -72,7 +72,6 @@ class _OfferDetails extends State<OfferDetails> {
         },
       );
     }
-    //_showReservationConfirmationDialog();
   }
 
   void cancelReservation() {}

@@ -29,17 +29,11 @@ void main() {
     ));
 
     // Create the Finders.
-    final navBarFav = find.widgetWithIcon(IconButton, Icons.favorite);
-    final navBarHome = find.widgetWithIcon(IconButton, Icons.travel_explore);
-    final navMyOffers = find.widgetWithIcon(IconButton, FontAwesome.food);
-    final navMessages = find.widgetWithIcon(IconButton, Icons.mail);
-    final navProfile = find.widgetWithIcon(IconButton, Icons.person);
+    final username = find.widgetWithText(TextFormField, 'Username');
+    final password = find.widgetWithText(TextFormField, 'Password');
 
-    expect(navBarFav, findsOneWidget);
-    expect(navBarHome, findsOneWidget);
-    expect(navMyOffers, findsOneWidget);
-    expect(navMessages, findsOneWidget);
-    expect(navProfile, findsOneWidget);
+    expect(username, findsOneWidget);
+    expect(password, findsOneWidget);
   });
 
   //Test the button to sign up loads
