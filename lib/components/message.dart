@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 // Returns all the objects offered in a certain area formatted as cards
-// ignore: must_be_immutable
 class Message extends StatelessWidget {
   String imageOfOffer = "default";
   String imageOfSolicitor = "default";

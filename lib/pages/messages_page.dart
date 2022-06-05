@@ -21,13 +21,14 @@ class MessagesPage extends StatefulWidget {
 // this class builds the details of a certain offer
 class _MessagesPage extends State<MessagesPage> {
   //Atributes
-  //Map<String, dynamic> userDetails = {};
   List<Map<String, String>> myMessages = [];
 
   _MessagesPage() {
     getMessages();
   }
 
+  // API to get the messages of the logged in user
+  // Then they are rendered using Message class
   void getMessages() async {
     final response = await http.get(
         Uri.parse('http://10.0.2.2:8000/user/requests/'),

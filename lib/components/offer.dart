@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../global_var.dart' as globals;
 
-// Returns all the objects offered in a certain area formatted as cards
+// Class Offer. It has two constructors and a build method so the same style is applyied
+// in all the application
 class Offer extends StatelessWidget {
   String id = "-1";
   String categoryId = "-1";
@@ -101,6 +102,7 @@ class Offer extends StatelessWidget {
   }
 }
 
+// Call to the API to get the picture of the offer by providing its ID
 Future<String> getPictureOfferById(String id) async {
   final response = await http.get(
       Uri.parse('http://10.0.2.2:8000/offer/' + id + '/'),

@@ -12,14 +12,14 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPage();
 }
 
-// this class builds the details of a certain offer
+// this class builds the login page
 class _LoginPage extends State<LoginPage> {
   //Atributes
   //the controlers are useful to retrieve the tect from the text fields
   final myControllerUsername = TextEditingController();
   final myControllerPassword = TextEditingController();
 
-  // this method validates the inserted data and logins to the account
+  // this method gets the inserted data and logins to the account
   Future<void> validateLogin() async {
     final response = await http.post(
       Uri.parse('http://10.0.2.2:8000/login'),

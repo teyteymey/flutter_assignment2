@@ -6,8 +6,6 @@ import 'package:flutter_assignment2/pages/my_offers_page.dart';
 import '../components/user.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import '../global_var.dart' as globals;
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -16,15 +14,15 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePage();
 }
 
-// this class builds the details of a certain offer
+// this class shows the profile of the logged in user
 class _ProfilePage extends State<ProfilePage> {
   //Atributes
   Map<String, dynamic> userDetails = {};
   List<Map<String, dynamic>> friends = [];
 
   _ProfilePage() {
-    userDetails = globals.users; //todo: implement call to api
-    friends = globals.friends; //todo: implement call to api
+    userDetails = globals.users;
+    friends = globals.friends;
   }
 
   @override

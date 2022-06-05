@@ -9,6 +9,7 @@ import '../global_var.dart' as globals;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+// Page that shows the favorite offers of a user
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({Key? key}) : super(key: key);
 
@@ -16,7 +17,6 @@ class FavoritesPage extends StatefulWidget {
   State<FavoritesPage> createState() => _FavoritesPageState();
 }
 
-// I cant implement the method to add favorites because I need the api for that.
 class _FavoritesPageState extends State<FavoritesPage> {
   Widget customSearchBar = const Text('Favorite offers');
   List<Map<String, dynamic>> favoriteOffers = [];
@@ -25,6 +25,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
     getFavoriteOffers();
   }
 
+  // Calls the API and gets a lost of the favorite offers of the user
   void getFavoriteOffers() async {
     final response = await http.get(
         Uri.parse('http://10.0.2.2:8000//user/favorite_offers/'),

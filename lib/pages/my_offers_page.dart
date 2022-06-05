@@ -27,6 +27,7 @@ class _MyOffers extends State<MyOffers> {
     getMyOffers();
   }
 
+  //Calls the API and get the offers posted by the user and saves them in the variable myOffers
   void getMyOffers() async {
     final response = await http.get(
         Uri.parse('http://10.0.2.2:8000/user/offers/'),

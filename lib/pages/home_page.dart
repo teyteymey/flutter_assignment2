@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/pages/favorites_page.dart';
 import 'package:flutter_assignment2/pages/messages_page.dart';
@@ -10,6 +9,7 @@ import '../components/offer.dart';
 import '../global_var.dart' as globals;
 import 'package:http/http.dart' as http;
 
+// Home page of the application. Shows offers available
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -26,6 +26,8 @@ class _MyHomePageState extends State<MyHomePage> {
     getOffers();
   }
 
+  // Calls the API and get the available offers
+  // With this, we can render them in widgets using the Offer class
   void getOffers() async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8000/offers'),
         headers: <String, String>{
@@ -53,12 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called,.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(

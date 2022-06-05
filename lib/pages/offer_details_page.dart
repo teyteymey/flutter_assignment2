@@ -58,6 +58,7 @@ class _OfferDetails extends State<OfferDetails> {
     if (response.statusCode == 200) {
       _showReservationConfirmationDialog();
     } else {
+      //if the call fails, show a message to the user
       showDialog(
         context: context,
         builder: (context) {
@@ -75,10 +76,6 @@ class _OfferDetails extends State<OfferDetails> {
   }
 
   void cancelReservation() {}
-
-  // //todo: need to check if this item is already reserved by the active user to
-  // //show the corresponding navigation bar (reserve or cancel reservation)
-  // void checkIfReserved() {}
 
   // shows the reservation confirmation
   Future<void> _showReservationConfirmationDialog() async {

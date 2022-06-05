@@ -12,8 +12,7 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPage();
 }
 
-// this class builds the details of a certain offer
-// ignore: camel_case_types
+// this class shows the register page
 class _RegisterPage extends State<RegisterPage> {
   //Atributes
   //the controlers are useful to retrieve the tect from the text fields
@@ -21,6 +20,7 @@ class _RegisterPage extends State<RegisterPage> {
   final myControllerPassword = TextEditingController();
   final myControllerPassword2 = TextEditingController();
 
+  // Calls the API to register the new user and it handles the errors
   Future<void> validateSignUp() async {
     final response = await http.post(
       Uri.parse('http://10.0.2.2:8000/register/'),
@@ -48,8 +48,6 @@ class _RegisterPage extends State<RegisterPage> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0)), //make alert rounded
             backgroundColor: const Color.fromARGB(237, 244, 242, 221),
-            // Retrieve the text that the user has entered by using the
-            // TextEditingController.
             content: const Text(
                 "There has been an error, wait some time and try again"),
           );

@@ -20,7 +20,7 @@ class PostOffer extends StatefulWidget {
 // this class builds the details of a certain offer
 class _PostOffer extends State<PostOffer> {
   //Atributes
-  //the controlers are useful to retrieve the tect from the text fields
+  //the controlers are useful to retrieve the text from the text fields
   final myControllerName = TextEditingController();
   final myControllerDescription = TextEditingController();
   final myControllerDate = TextEditingController();
@@ -39,8 +39,9 @@ class _PostOffer extends State<PostOffer> {
     if (size >= 4) image4 = globals.pathImages[3];
   }
 
+  // Calls the API with the data passed as parameters to create a new offer
   void postOffer(
-      String title, String description, String image, String end_date) async {
+      String title, String description, String image, String endDate) async {
     final response = await http.post(
       Uri.parse('http://10.0.2.2:8000/offers/'),
       body: jsonEncode(<String, String>{
@@ -48,11 +49,12 @@ class _PostOffer extends State<PostOffer> {
         "title": title,
         "description": description,
         "image": image,
-        "end_date": end_date
+        "end_date": endDate
       }),
     );
 
     if (response.statusCode != 201) {
+      // If fails, it shows a message to the user
       showDialog(
         context: context,
         builder: (context) {
@@ -76,9 +78,6 @@ class _PostOffer extends State<PostOffer> {
   void validateOffer() {
     Map<String, dynamic> newOffer;
     try {
-      //check if best before date is correct
-      //todo: check if date is posterior to today
-
       DateFormat format = DateFormat("dd/MM/yyyy");
 
       DateTime now = DateTime.now();
@@ -106,7 +105,6 @@ class _PostOffer extends State<PostOffer> {
       postOffer(myControllerName.text, myControllerDescription.text, image1,
           bestbefore.toString());
     } catch (error) {
-      print("error in format");
       _showErrorInDateFormat();
     }
   }
@@ -121,8 +119,6 @@ class _PostOffer extends State<PostOffer> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0)), //make alert rounded
           backgroundColor: const Color.fromARGB(237, 244, 242, 221),
-          // Retrieve the text that the user has entered by using the
-          // TextEditingController.
           content: const Text(
               "The entered date is not in the correct format or is before today"),
         );
