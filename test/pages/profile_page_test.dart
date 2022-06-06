@@ -5,7 +5,9 @@ import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 //Class to test my profile page
+
 //THis class used to pass but now I do not know why I can not figure out what the problem is
+//RS3: Implement friend list
 void main() {
   testWidgets('Page title loads', (tester) async {
     // await mockNetworkImagesFor(() async => await tester.pumpWidget(

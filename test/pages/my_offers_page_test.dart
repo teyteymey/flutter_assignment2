@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
 //Class to test my offers page
+// RM8: see own posted offers
 void main() {
   testWidgets('Page title loads', (tester) async {
     await tester.pumpWidget(const MaterialApp(

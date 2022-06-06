@@ -3,6 +3,7 @@ import 'package:flutter_assignment2/pages/post_offer_page.dart';
 import 'package:flutter/material.dart';
 
 //Class to test the page to add a new offer
+// RM2: Offer a food
 void main() {
   //Test that the form loads correctly
   testWidgets('Form loads', (tester) async {

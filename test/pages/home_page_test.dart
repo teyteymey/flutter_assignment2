@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
 //Class to test home page build
+//RM1 : Show relevant items in homepage
 void main() {
   //Test that the title loads
   testWidgets('home page title loads', (tester) async {

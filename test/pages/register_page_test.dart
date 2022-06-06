@@ -3,6 +3,7 @@ import 'package:flutter_assignment2/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
 //Class to test the register page
+// RM4: Create a profile
 void main() {
   //Test that the logo loads
   testWidgets('register page shows image', (tester) async {

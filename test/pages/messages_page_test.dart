@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
 //Class to test the messages page
+// RM7: Accept offer request manually
 void main() {
   testWidgets('messages page title loads', (tester) async {
     await tester.pumpWidget(const MaterialApp(

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 //Class to test details page
+//RM3: Reserve a product
+//RM5: See product informaiton
 void main() {
   testWidgets('Page back navigation loads', (tester) async {
     final Map<String, dynamic> myoffer = {
