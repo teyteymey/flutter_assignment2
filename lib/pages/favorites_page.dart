@@ -19,22 +19,35 @@ class FavoritesPage extends StatefulWidget {
 
 class _FavoritesPageState extends State<FavoritesPage> {
   Widget customSearchBar = const Text('Favorite offers');
-  List<Map<String, dynamic>> favoriteOffers = [];
+  List<Offer> favoriteOffers = [];
 
-  _FavoritesPageState() {
-    getFavoriteOffers();
+  @override
+  void initState() {
+    getFavoriteOffers().then((value) {
+      print('Async done');
+    });
+    super.initState();
   }
 
+  _FavoritesPageState() {}
+
   // Calls the API and gets a lost of the favorite offers of the user
-  void getFavoriteOffers() async {
-    final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/user/favorite_offers/'),
-        headers: <String, String>{
-          'Authorization': 'Bearer ' + globals.accessToken,
-        });
+  Future getFavoriteOffers() async {
+    var headers = {
+      'Authorization': 'Bearer ' + globals.accessToken,
+    };
+    var request = http.Request(
+        'GET', Uri.parse('http://10.0.2.2:8000/user/favorite_offers'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      favoriteOffers = jsonDecode(response.body);
+      Iterable l = json.decode(await response.stream.bytesToString());
+      favoriteOffers =
+          List<Offer>.from(l.map((model) => Offer.fromJson(model)));
+      setState(() {});
     } else {
       showDialog(
         context: context,
@@ -50,6 +63,36 @@ class _FavoritesPageState extends State<FavoritesPage> {
         },
       );
     }
+
+    //THIS WAY WAS NOT WORKING FOR SOME REASON
+    // final response = await http.get(
+    //     Uri.parse('http://10.0.2.2:8000/user/favorite_offers/'),
+    //     headers: <String, String>{
+    //       'Authorization': 'Bearer ' + globals.accessToken,
+    //     });
+
+    // print(response.body);
+
+    // if (response.statusCode == 200) {
+    //   Iterable l = json.decode(response.body);
+    //   favoriteOffers =
+    //       List<Offer>.from(l.map((model) => Offer.fromJson(model)));
+    //   setState(() {});
+    // } else {
+    //   showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return AlertDialog(
+    //         shape: RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+    //         backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+    //         // Retrieve the text that the user has entered by using the
+    //         // TextEditingController.
+    //         content: const Text("Failed to get favorite offers."),
+    //       );
+    //     },
+    //   );
+    // }
   }
 
   @override
@@ -70,7 +113,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in favoriteOffers) Offer.fromJson(i)
+              for (var i in favoriteOffers) i.build(context)
             ], // for each offer, we create and display a card
           ),
         ),

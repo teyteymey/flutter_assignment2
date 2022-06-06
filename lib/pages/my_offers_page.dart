@@ -21,22 +21,34 @@ class MyOffers extends StatefulWidget {
 class _MyOffers extends State<MyOffers> {
   //Atributes
   Map<String, dynamic> userDetails = {};
-  List<Map<String, dynamic>> myOffers = [];
+  List<Offer> offers = [];
 
-  _MyOffers() {
-    getMyOffers();
+  @override
+  void initState() {
+    getMyOffers().then((value) {
+      print('Async done');
+    });
+    super.initState();
   }
 
+  _MyOffers() {}
+
   //Calls the API and get the offers posted by the user and saves them in the variable myOffers
-  void getMyOffers() async {
-    final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/user/offers/'),
-        headers: <String, String>{
-          'Authorization': 'Bearer ' + globals.accessToken,
-        });
+  Future getMyOffers() async {
+    var headers = {
+      'Authorization': 'Bearer ' + globals.accessToken,
+    };
+    var request =
+        http.Request('GET', Uri.parse('http://10.0.2.2:8000/user/offers'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      myOffers = jsonDecode(response.body);
+      Iterable l = json.decode(await response.stream.bytesToString());
+      offers = List<Offer>.from(l.map((model) => Offer.fromJson(model)));
+      setState(() {});
     } else {
       showDialog(
         context: context,
@@ -52,6 +64,32 @@ class _MyOffers extends State<MyOffers> {
         },
       );
     }
+
+    // final response = await http.get(
+    //     Uri.parse('http://10.0.2.2:8000/user/offers/'),
+    //     headers: <String, String>{
+    //       'Authorization': 'Bearer ' + globals.accessToken,
+    //     });
+
+    // if (response.statusCode == 200) {
+    //   Iterable l = json.decode(response.body);
+    //   offers = List<Offer>.from(l.map((model) => Offer.fromJson(model)));
+    //   setState(() {});
+    // } else {
+    //   showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return AlertDialog(
+    //         shape: RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+    //         backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+    //         // Retrieve the text that the user has entered by using the
+    //         // TextEditingController.
+    //         content: const Text("Failed to get user offers."),
+    //       );
+    //     },
+    //   );
+    // }
   }
 
   @override
@@ -74,7 +112,7 @@ class _MyOffers extends State<MyOffers> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var i in myOffers) Offer.fromJson(i)
+              for (var i in offers) i.build(context)
             ], // for each offer, we create and display a card
           ),
         ),

@@ -42,17 +42,43 @@ class _PostOffer extends State<PostOffer> {
   // Calls the API with the data passed as parameters to create a new offer
   void postOffer(
       String title, String description, String image, String endDate) async {
-    final response = await http.post(
-      Uri.parse('http://10.0.2.2:8000/offers/'),
-      body: jsonEncode(<String, String>{
-        "category_id": "1",
-        "title": title,
-        "description": description,
-        "image": image,
-        "end_date": endDate
-      }),
-    );
+    print(endDate);
+    var headers = {
+      'Authorization': 'Bearer ' + globals.accessToken,
+    };
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://10.0.2.2:8000/offers/'));
+    request.fields.addAll({
+      'category_type': 'Fruits',
+      'title': title,
+      'description': description,
+      'end_date': endDate,
+    });
+    request.files.add(await http.MultipartFile.fromPath('image', image));
+    request.headers.addAll(headers);
 
+    http.StreamedResponse response = await request.send();
+
+    print(response.reasonPhrase);
+
+    // final response = await http.post(
+    //   Uri.parse('http://10.0.2.2:8000/offers/'),
+    //   headers: <String, String>{
+    //     'Authorization': 'Bearer ' + globals.accessToken,
+    //   },
+    //   body: jsonEncode(
+    //     <String, String>{
+    //       "category_type": "Fruits",
+    //       "title": title,
+    //       "description": description,
+    //       "image": image,
+    //       "end_date": endDate
+    //     },
+    //   ),
+    // );
+    // print(response.body);
+
+    print(response.statusCode);
     if (response.statusCode != 201) {
       // If fails, it shows a message to the user
       showDialog(
@@ -64,7 +90,8 @@ class _PostOffer extends State<PostOffer> {
             backgroundColor: const Color.fromARGB(237, 244, 242, 221),
             // Retrieve the text that the user has entered by using the
             // TextEditingController.
-            content: const Text("Failed to get user offers."),
+            content: const Text(
+                "Failed to get post offer. Make sure you took at least one picture"),
           );
         },
       );
@@ -76,9 +103,8 @@ class _PostOffer extends State<PostOffer> {
 
   // This method gathers all the information and sends a request to the api with the info of the new offer.
   void validateOffer() {
-    Map<String, dynamic> newOffer;
     try {
-      DateFormat format = DateFormat("dd/MM/yyyy");
+      final DateFormat format = DateFormat("yyyy-MM-dd");
 
       DateTime now = DateTime.now();
       String todaydate = format.format(now);
@@ -87,23 +113,12 @@ class _PostOffer extends State<PostOffer> {
 
       if (bestbefore.isBefore(now)) throw Exception;
 
-      newOffer = {
-        "id": "1",
-        "category_id": "1",
-        "user_id": "1",
-        "title": myControllerName.text,
-        "description": myControllerDescription.text,
-        "image": image1,
-        "closed": false,
-        "end_date": bestbefore.toString(),
-        "created_at": todaydate.toString(),
-        "closed_at": null
-      };
-
       globals.pathImages.clear();
 
+      final String formatted = format.format(bestbefore);
+
       postOffer(myControllerName.text, myControllerDescription.text, image1,
-          bestbefore.toString());
+          formatted);
     } catch (error) {
       _showErrorInDateFormat();
     }
@@ -237,7 +252,7 @@ class _PostOffer extends State<PostOffer> {
                   key: const Key('bestBefore'),
                   decoration: const InputDecoration(
                     labelText: 'Best before',
-                    helperText: 'dd/mm/yyyy',
+                    helperText: 'yyyy-mm-dd',
                     labelStyle: TextStyle(
                       color: Color.fromARGB(255, 42, 134, 0),
                     ),

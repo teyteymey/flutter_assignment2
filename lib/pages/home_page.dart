@@ -43,7 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
       offers = List<Offer>.from(l.map((model) => Offer.fromJson(model)));
-      print(l);
       setState(() {});
     } else {
       showDialog(
