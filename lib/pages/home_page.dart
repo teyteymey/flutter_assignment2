@@ -20,22 +20,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Icon customIcon = const Icon(Icons.search);
   Widget customSearchBar = const Text('Offers near you');
-  List<Map<String, dynamic>> offers = [];
+  List<Offer> offers = [];
 
-  _MyHomePageState() {
-    getOffers();
+  @override
+  void initState() {
+    getOffers().then((value) {
+      print('Async done');
+    });
+    super.initState();
   }
+
+  _MyHomePageState() {}
 
   // Calls the API and get the available offers
   // With this, we can render them in widgets using the Offer class
-  void getOffers() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/offers'),
+  Future getOffers() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/offers/'),
         headers: <String, String>{
           'Authorization': 'Bearer ' + globals.accessToken,
         });
 
     if (response.statusCode == 200) {
-      offers = jsonDecode(response.body);
+      Iterable l = json.decode(response.body);
+      offers = List<Offer>.from(l.map((model) => Offer.fromJson(model)));
+      setState(() {});
     } else {
       showDialog(
         context: context,
@@ -110,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for (var offer in offers) Offer.fromJson(offer)
+              for (var offer in offers) offer.build(context),
             ], // for each offer, we create and display a card
           ),
         ),

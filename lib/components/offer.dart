@@ -8,18 +8,29 @@ import '../global_var.dart' as globals;
 // Class Offer. It has two constructors and a build method so the same style is applyied
 // in all the application
 class Offer extends StatelessWidget {
-  String id = "-1";
-  String categoryId = "-1";
-  String userId = "-1";
-  String title = "default";
-  String description = "default";
-  String image = "default";
-  bool closed = false;
-  String endDate = "20-02-2022";
-  String createdAt = "20-02-2022";
-  String closedAt = "20-02-2022";
-  String distance = "default";
+  var id = "-1";
+  var categoryId = "-1";
+  var userId = "-1";
+  var title = "default";
+  var description = "default";
+  var image = "default";
+  var closed = "false";
+  var endDate = "20-02-2022";
+  var createdAt = "20-02-2022";
+  var closedAt = "20-02-2022";
+  var distance = "default";
 
+  // String id = "-1";
+  // String categoryId = "-1";
+  // String userId = "-1";
+  // String title = "default";
+  // String description = "default";
+  // String image = "default";
+  // bool closed = false;
+  // String endDate = "20-02-2022";
+  // String createdAt = "20-02-2022";
+  // String closedAt = "20-02-2022";
+  // String distance = "default";
   Map<String, dynamic> offerDetailsMap = {};
 
   // // constructor method, sets all the attributes
@@ -46,18 +57,18 @@ class Offer extends StatelessWidget {
     required this.closedAt,
   }) : super(key: key);
 
-  factory Offer.fromJson(Map<String, dynamic> json) {
+  factory Offer.fromJson(Map<dynamic, dynamic> json) {
     return Offer(
-        id: json['id'],
-        categoryId: json['category_id'],
-        userId: json['user_id'],
-        title: json['title'],
-        description: json['description'],
-        image: json['image'],
-        closed: json['closed'],
-        endDate: json['end_date'],
-        createdAt: json['created_at'],
-        closedAt: json['closed_at']);
+        id: json['id'].toString(),
+        categoryId: json['category_id'].toString(),
+        userId: json['user_id'].toString(),
+        title: json['title'].toString(),
+        description: json['description'].toString(),
+        image: json['image'].toString(),
+        closed: json['closed'].toString(),
+        endDate: json['end_date'].toString(),
+        createdAt: json['created_at'].toString(),
+        closedAt: json['closed_at'].toString());
   }
 
   @override
@@ -76,11 +87,11 @@ class Offer extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Column(
           children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: Image.network(
-                  image,
-                )),
+            // ClipRRect(
+            //     borderRadius: BorderRadius.circular(15.0),
+            //     child: Image.network(
+            //       'http:/' + image,
+            //     )),
             ListTile(
               title: Text(title,
                   style: const TextStyle(

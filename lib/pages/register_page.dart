@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/pages/home_page.dart';
+import 'package:flutter_assignment2/pages/login_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_assignment2/global_var.dart' as globals;
 
@@ -21,23 +22,27 @@ class _RegisterPage extends State<RegisterPage> {
   final myControllerPassword2 = TextEditingController();
 
   // Calls the API to register the new user and it handles the errors
-  Future<void> validateSignUp() async {
+  Future<void> validateSignUp(BuildContext context) async {
     final response = await http.post(
       Uri.parse('http://10.0.2.2:8000/register/'),
       body: jsonEncode(<String, String>{
-        'username': myControllerUsername.toString(),
-        'password1': myControllerPassword.toString(),
-        'password2': myControllerPassword.toString(),
+        'username': myControllerUsername.text.toString().trim(),
+        'password1': myControllerPassword.text.toString().trim(),
+        'password2': myControllerPassword.text.toString().trim(),
         'first_name': 'default',
         'last_name': 'default',
       }),
+      headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+      },
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       final data = jsonDecode(response.body);
       globals.accessToken = data['access_token'];
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
     } else {
       // If the server did not return a 201 CREATED response,
       // then throw an exception.
@@ -194,10 +199,7 @@ class _RegisterPage extends State<RegisterPage> {
                         },
                       );
                     } else {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MyHomePage()));
+                      validateSignUp(context);
                     }
                   },
                   child: const Text('Create account'),

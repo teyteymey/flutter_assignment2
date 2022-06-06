@@ -22,12 +22,18 @@ class _LoginPage extends State<LoginPage> {
   // this method gets the inserted data and logins to the account
   Future<void> validateLogin() async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:8000/login'),
+      Uri.parse('http://10.0.2.2:8000/login/'),
       body: jsonEncode(<String, String>{
-        'username': myControllerUsername.toString(),
-        'password': myControllerPassword.toString(),
+        'username': myControllerUsername.text.toString().trim(),
+        'password': myControllerPassword.text.toString().trim(),
       }),
+      headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+      },
     );
+    print(response.body);
+    print(response.statusCode);
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

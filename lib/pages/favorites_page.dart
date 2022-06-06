@@ -28,7 +28,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   // Calls the API and gets a lost of the favorite offers of the user
   void getFavoriteOffers() async {
     final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000//user/favorite_offers/'),
+        Uri.parse('http://10.0.2.2:8000/user/favorite_offers/'),
         headers: <String, String>{
           'Authorization': 'Bearer ' + globals.accessToken,
         });
