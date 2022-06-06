@@ -18,7 +18,7 @@ class Offer extends StatelessWidget {
   var endDate = "20-02-2022";
   var createdAt = "20-02-2022";
   var closedAt = "20-02-2022";
-  var distance = "default";
+  var distance = "1.5 km";
 
   // String id = "-1";
   // String categoryId = "-1";
@@ -78,8 +78,7 @@ class Offer extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => OfferDetails(offerDetailsMap)),
+          MaterialPageRoute(builder: (context) => OfferDetails(this)),
         );
       },
       child: Card(
@@ -87,11 +86,13 @@ class Offer extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Column(
           children: [
-            // ClipRRect(
-            //     borderRadius: BorderRadius.circular(15.0),
-            //     child: Image.network(
-            //       'http:/' + image,
-            //     )),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                // child: Image.network(
+                //   'http:/' + image,
+                // )
+                child: Image.network(
+                    'https://www.boodschappen.nl/app/uploads/2018/09/Header_iStock-537514836-780x520.jpg')),
             ListTile(
               title: Text(title,
                   style: const TextStyle(

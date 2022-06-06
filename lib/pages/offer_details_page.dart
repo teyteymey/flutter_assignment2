@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import '../components/user.dart';
+import '../components/offer.dart';
 import '../global_var.dart' as globals;
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,40 +10,30 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class OfferDetails extends StatefulWidget {
-  Map<String, dynamic> offerDetailsMap = {};
+  Offer offer;
 
-  OfferDetails(this.offerDetailsMap, {Key? key}) : super(key: key);
+  OfferDetails(this.offer, {Key? key}) : super(key: key);
 
   @override
-  State<OfferDetails> createState() => _OfferDetails(offerDetailsMap);
+  State<OfferDetails> createState() => _OfferDetails(offer);
 }
 
 // this class builds the details of a certain offer
 class _OfferDetails extends State<OfferDetails> {
   // ATTRIBUTES
-  Map<String, dynamic> offerDetails = {};
   String title = "default";
   String best_before = "default";
   String distance = "default";
   //default image
   String image = "default";
-  String city = "default"; //todo
+  String city = "Deventer"; //todo
   String description = "default";
   bool reserved = false; //default
+  Offer offerLocal;
 
   // BUILDER METHOD
   // we set the attributes of the offer
-  _OfferDetails(Map<String, dynamic> offerDetails) {
-    offerDetails = offerDetails;
-    title = offerDetails["title"];
-    best_before = offerDetails["end_date"];
-    distance = "1.5 km"; // todo
-    city = "Deventer"; //todo
-    image = offerDetails["image"];
-    description = offerDetails["description"];
-    reserved = false; //default
-    //checkIfReserved(); //todo: check if reserved or not
-  }
+  _OfferDetails(this.offerLocal) {}
 
   //Send a reservation request to the API
   Future<void> reserve() async {
@@ -50,12 +41,16 @@ class _OfferDetails extends State<OfferDetails> {
         await http.post(Uri.parse('http://10.0.2.2:8000/reservations/'),
             headers: <String, String>{
               'Authorization': 'Bearer ' + globals.accessToken,
+              "content-type": "application/json",
+              "accept": "application/json",
             },
             body: jsonEncode(
-              <String, String>{'offer_id': offerDetails["id"]},
+              <String, String>{'offer_id': offerLocal.id.trim()},
             ));
-
-    if (response.statusCode == 200) {
+    print(offerLocal.id);
+    print(response.body);
+    print(response.statusCode);
+    if (response.statusCode == 201) {
       _showReservationConfirmationDialog();
     } else {
       //if the call fails, show a message to the user
@@ -249,16 +244,18 @@ class _OfferDetails extends State<OfferDetails> {
                 CrossAxisAlignment.start, // so the text starts at the left
             children: <Widget>[
               const Padding(padding: EdgeInsets.only(top: 38)),
+              // Image.network(
+              //   //image
+              //   //first we load the image
+              //   offerLocal.image,
+              // ),
               Image.network(
-                //image
-                //first we load the image
-                image,
-              ),
+                  'https://www.boodschappen.nl/app/uploads/2018/09/Header_iStock-537514836-780x520.jpg'),
               Padding(
                 // title
                 //some space between the image and the title
                 padding: const EdgeInsets.all(15.0),
-                child: Text(title,
+                child: Text(offerLocal.title,
                     textAlign: TextAlign.left,
                     style: const TextStyle(
                       fontFamily: 'JosefinSans',
@@ -296,7 +293,7 @@ class _OfferDetails extends State<OfferDetails> {
                       size: 15,
                     ),
                     Text("   " +
-                        best_before +
+                        offerLocal.endDate +
                         "    "), // putting some distance between the icon and the location
                     const Text(
                       "(best before)",
@@ -319,7 +316,7 @@ class _OfferDetails extends State<OfferDetails> {
                 //description of the product
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Text(
-                  description,
+                  offerLocal.description,
                   textAlign: TextAlign.justify,
                 ),
               ),
