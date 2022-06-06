@@ -39,7 +39,6 @@ Future<String> getNameUserById(String id) async {
       headers: <String, String>{
         'Authorization': 'Bearer ' + globals.accessToken,
       });
-  print(responseUser.body);
   if (responseUser.statusCode == 200) {
     final data = jsonDecode(responseUser.body);
     return data['first_name'];

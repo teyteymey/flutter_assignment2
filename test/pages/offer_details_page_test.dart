@@ -1,3 +1,4 @@
+import 'package:flutter_assignment2/components/offer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_assignment2/pages/offer_details_page.dart';
 import 'package:flutter/material.dart';
@@ -6,19 +7,20 @@ import 'package:network_image_mock/network_image_mock.dart';
 //Class to test details page
 void main() {
   testWidgets('Page back navigation loads', (tester) async {
-    Map<String, dynamic> offer = {
-      "id": "1",
+    final Map<String, dynamic> myoffer = {
+      "id": "2",
       "category_id": "1",
       "user_id": "1",
-      "title": "Half kg of avocados",
-      "description": "Hello world! I come from global variables daaata",
+      "title": "Half kg of lemons",
+      "description": "Hello world!",
       "image":
-          "https://images.unsplash.com/photo-1593280443077-ae46e0100ad1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJhbmFuYXxlbnwwfHwwfHw%3D&w=1000&q=80",
+          "https://post.healthline.com/wp-content/uploads/2020/09/lemon-health-benefits-1200x628-facebook-1200x628.jpg",
       "closed": false,
       "end_date": "23-03-2022",
       "created_at": "20-02-2022",
-      "closed_at": null
+      "closed_at": "20-02-2022"
     };
+    Offer offer = Offer.fromJson(myoffer);
 
     await mockNetworkImagesFor(() async => await tester.pumpWidget(
           MaterialApp(
@@ -35,19 +37,20 @@ void main() {
 
   //Test to check that the button is correct
   testWidgets('button is showed', (tester) async {
-    Map<String, dynamic> offer = {
-      "id": "1",
+    final Map<String, dynamic> myoffer = {
+      "id": "2",
       "category_id": "1",
       "user_id": "1",
-      "title": "Half kg of avocados",
-      "description": "Hello world! I come from global variables daaata",
+      "title": "Half kg of lemons",
+      "description": "Hello world!",
       "image":
-          "https://images.unsplash.com/photo-1593280443077-ae46e0100ad1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJhbmFuYXxlbnwwfHwwfHw%3D&w=1000&q=80",
+          "https://post.healthline.com/wp-content/uploads/2020/09/lemon-health-benefits-1200x628-facebook-1200x628.jpg",
       "closed": false,
       "end_date": "23-03-2022",
       "created_at": "20-02-2022",
-      "closed_at": null
+      "closed_at": "20-02-2022"
     };
+    Offer offer = Offer.fromJson(myoffer);
     await mockNetworkImagesFor(() async => await tester.pumpWidget(
           MaterialApp(
             home: Material(
@@ -63,19 +66,20 @@ void main() {
 
   //Test to check that the information showed is correct
   testWidgets('information is correct', (tester) async {
-    Map<String, dynamic> offer = {
-      "id": "1",
+    final Map<String, dynamic> myoffer = {
+      "id": "2",
       "category_id": "1",
       "user_id": "1",
-      "title": "Half kg of avocados",
+      "title": "Half kg of lemons",
       "description": "Hello world!",
       "image":
-          "https://images.unsplash.com/photo-1593280443077-ae46e0100ad1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJhbmFuYXxlbnwwfHwwfHw%3D&w=1000&q=80",
+          "https://post.healthline.com/wp-content/uploads/2020/09/lemon-health-benefits-1200x628-facebook-1200x628.jpg",
       "closed": false,
       "end_date": "23-03-2022",
       "created_at": "20-02-2022",
-      "closed_at": null
+      "closed_at": "20-02-2022"
     };
+    Offer offer = Offer.fromJson(myoffer);
     await mockNetworkImagesFor(() async => await tester.pumpWidget(
           MaterialApp(
             home: Material(
@@ -84,7 +88,7 @@ void main() {
           ),
         ));
 
-    final textFinder = find.text('Half kg of avocados');
+    final textFinder = find.text('Half kg of lemons');
     final textFinder2 = find.text('Hello world!');
 
     expect(textFinder, findsOneWidget);

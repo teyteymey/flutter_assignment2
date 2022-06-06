@@ -29,7 +29,7 @@ void main() {
         title: "testTitle",
         description: "testDesc",
         image: "",
-        closed: false,
+        closed: "false",
         endDate: "20-02-2022",
         createdAt: "20-02-2022",
         closedAt: "25-02-2022");

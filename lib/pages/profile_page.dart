@@ -20,20 +20,18 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePage extends State<ProfilePage> {
   //Atributes
   Map userDetails = {};
-  List<Map<String, dynamic>> friends = [];
+  List<Map<String, dynamic>> friends = globals.friends;
+  String username = 'def';
 
   @override
   void initState() {
     getDataLoggedUser().then((value) {
       print('Async done');
     });
-    print(userDetails);
     super.initState();
   }
 
-  _ProfilePage() {
-    friends = globals.friends;
-  }
+  _ProfilePage() {}
 
   // Call to the API to get the name of the logged in user
   Future getDataLoggedUser() async {
@@ -41,13 +39,24 @@ class _ProfilePage extends State<ProfilePage> {
         .get(Uri.parse('http://10.0.2.2:8000/user/'), headers: <String, String>{
       'Authorization': 'Bearer ' + globals.accessToken,
     });
-    print(responseUser.body);
     if (responseUser.statusCode == 200) {
-      userDetails = jsonDecode(responseUser.body);
+      userDetails = await jsonDecode(responseUser.body);
+      username = userDetails["username"];
       setState(() {});
-      print(userDetails);
     } else {
-      throw Exception('Failed to get user.');
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            // Retrieve the text that the user has entered by using the
+            // TextEditingController.
+            content: const Text("Failed to get user."),
+          );
+        },
+      );
     }
   }
 
@@ -135,7 +144,7 @@ class _ProfilePage extends State<ProfilePage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     Text(
-                      userDetails["username"], //name of user
+                      username, //name of user
                       style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
