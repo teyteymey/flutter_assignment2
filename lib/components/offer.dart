@@ -117,10 +117,11 @@ class Offer extends StatelessWidget {
 // Call to the API to get the picture of the offer by providing its ID
 Future<String> getPictureOfferById(String id) async {
   final response = await http.get(
-      Uri.parse('http://10.0.2.2:8000/offer/' + id + '/'),
+      Uri.parse('http://10.0.2.2:8000/offers/' + id),
       headers: <String, String>{
         'Authorization': 'Bearer ' + globals.accessToken,
       });
+  print(response.body);
 
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body);

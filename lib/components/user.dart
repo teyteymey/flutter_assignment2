@@ -35,11 +35,11 @@ Widget userCard(Map<String, dynamic> userDetails) {
 // Call to the API to get the name of the user from its ID
 Future<String> getNameUserById(String id) async {
   final responseUser = await http.get(
-      Uri.parse('http://10.0.2.2:8000/user/' + id + '/'),
+      Uri.parse('http://10.0.2.2:8000/user/' + id),
       headers: <String, String>{
         'Authorization': 'Bearer ' + globals.accessToken,
       });
-
+  print(responseUser.body);
   if (responseUser.statusCode == 200) {
     final data = jsonDecode(responseUser.body);
     return data['first_name'];
