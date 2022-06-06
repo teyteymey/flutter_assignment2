@@ -48,11 +48,13 @@ class _MessagesPage extends State<MessagesPage> {
           'https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half-caption/public/field_blog_entry_images/2018-09/shutterstock_648907024.jpg?itok=0hb44OrI';
       for (var message in l) {
         name = await getNameUserById(message['user_id'].toString());
+        print(message);
         //AGAIN: LOADING PICS FROM BACKEND IS NEAR IMPOSSIBLE SO I WILL ASSIGN A DEFAULT ONE
         //imageOffer = await getPictureOfferById(message['offer_id'].toString());
         imageOffer =
             'https://www.boodschappen.nl/app/uploads/2018/09/Header_iStock-537514836-780x520.jpg';
         Map<String, String> aux = {};
+        aux["id"] = message["id"].toString();
         aux["offerId"] = message['offer_id'].toString();
         aux["solicitorName"] = name;
         aux["imageOfSolicitor"] = imageUser;
@@ -62,7 +64,6 @@ class _MessagesPage extends State<MessagesPage> {
         setState(() {});
       }
     } else {
-      print(response.reasonPhrase);
       showDialog(
         context: context,
         builder: (context) {
@@ -78,49 +79,6 @@ class _MessagesPage extends State<MessagesPage> {
         },
       );
     }
-
-    // final response = await http.get(
-    //     Uri.parse('http://10.0.2.2:8000/user/requests/'),
-    //     headers: <String, String>{
-    //       'Authorization': 'Bearer ' + globals.accessToken,
-    //     });
-
-    // print(response.body);
-
-    // if (response.statusCode == 200) {
-    //   final List<dynamic> messages = jsonDecode(response.body);
-
-    //   Future<String> name;
-    //   Future<String> imageOffer;
-    //   String imageUser =
-    //       'https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half-caption/public/field_blog_entry_images/2018-09/shutterstock_648907024.jpg?itok=0hb44OrI';
-    //   for (var message in messages) {
-    //     name = getNameUserById(message['user_id']);
-    //     imageOffer = getPictureOfferById(message['offer_id']);
-    //     Map<String, String> aux = {} as Map<String, String>;
-    //     aux["OfferId"] = message['offer_id'];
-    //     aux["solicitorName"] = name as String;
-    //     aux["imageOfSolicitor"] = imageUser;
-    //     aux["imageOfOffer"] = imageOffer as String;
-
-    //     myMessages.add(aux);
-    //   }
-    // } else {
-    //   showDialog(
-    //     context: context,
-    //     builder: (context) {
-    //       return AlertDialog(
-    //         shape: RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.circular(15.0)), //make alert rounded
-    //         backgroundColor: const Color.fromARGB(237, 244, 242, 221),
-    //         // Retrieve the text that the user has entered by using the
-    //         // TextEditingController.
-    //         content:
-    //             const Text("Failed to get your messages. Try again after."),
-    //       );
-    //     },
-    //   );
-    // }
   }
 
   @override

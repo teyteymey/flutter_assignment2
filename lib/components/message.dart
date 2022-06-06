@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_assignment2/pages/messages_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_assignment2/global_var.dart' as globals;
 
 // Returns all the objects offered in a certain area formatted as cards
 class Message extends StatelessWidget {
@@ -9,9 +10,11 @@ class Message extends StatelessWidget {
   String imageOfSolicitor = "default";
   String solicitorName = "Tatiana";
   String offerId = "1";
+  String id = "";
 
   Message({
     Key? key,
+    required this.id,
     required this.imageOfOffer,
     required this.imageOfSolicitor,
     required this.solicitorName,
@@ -20,6 +23,7 @@ class Message extends StatelessWidget {
 
   // Builds a message from a map
   Message.fromMap(Map<String, dynamic> message, {Key? key}) : super(key: key) {
+    id = message["id"];
     imageOfOffer = message["imageOfOffer"];
     imageOfSolicitor = message["imageOfSolicitor"];
     solicitorName = message["solicitorName"];
@@ -29,13 +33,29 @@ class Message extends StatelessWidget {
   //Accepts the offer to reserve the product
   Future<void> acceptOffer(BuildContext context) async {
     final response = await http.put(
-      Uri.parse('http://10.0.2.2:8000/user/requests/' + offerId + '/'),
+      Uri.parse('http://10.0.2.2:8000/user/requests/' + id),
+      headers: <String, String>{
+        'Authorization': 'Bearer ' + globals.accessToken,
+        "content-type": "application/json",
+        "accept": "application/json",
+      },
       body: jsonEncode(<String, String>{
         'accepted': 'True',
       }),
     );
 
     if (response.statusCode == 200) {
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            content: const Text("Accepted!"),
+          );
+        },
+      );
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const MessagesPage()));
     } else {
@@ -59,13 +79,29 @@ class Message extends StatelessWidget {
   //Declines the offer to reserve the product
   void declineOffer(BuildContext context) async {
     final response = await http.put(
-      Uri.parse('http://10.0.2.2:8000/user/requests/' + offerId + '/'),
+      Uri.parse('http://10.0.2.2:8000/user/requests/' + id),
+      headers: <String, String>{
+        'Authorization': 'Bearer ' + globals.accessToken,
+        "content-type": "application/json",
+        "accept": "application/json",
+      },
       body: jsonEncode(<String, String>{
         'accepted': 'False',
       }),
     );
 
     if (response.statusCode == 200) {
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //make alert rounded
+            backgroundColor: const Color.fromARGB(237, 244, 242, 221),
+            content: const Text("Canceled"),
+          );
+        },
+      );
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const MessagesPage()));
     } else {
