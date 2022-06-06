@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_assignment2/pages/post_offer_page.dart';
 import 'package:flutter/material.dart';
-import 'package:network_image_mock/network_image_mock.dart';
 
 //Class to test the page to add a new offer
 void main() {

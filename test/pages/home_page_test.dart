@@ -1,4 +1,3 @@
-import 'package:flutter_assignment2/components/offer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_assignment2/pages/home_page.dart';
 import 'package:flutter/material.dart';

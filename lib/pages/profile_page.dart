@@ -20,7 +20,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePage extends State<ProfilePage> {
   //Atributes
   Map userDetails = {};
-  List<Map<String, dynamic>> friends = globals.friends;
+  List<Map<String, dynamic>> friends = [];
   String username = 'def';
 
   @override
@@ -28,6 +28,7 @@ class _ProfilePage extends State<ProfilePage> {
     getDataLoggedUser().then((value) {
       print('Async done');
     });
+    friends = globals.friends;
     super.initState();
   }
 
@@ -40,7 +41,7 @@ class _ProfilePage extends State<ProfilePage> {
       'Authorization': 'Bearer ' + globals.accessToken,
     });
     if (responseUser.statusCode == 200) {
-      userDetails = await jsonDecode(responseUser.body);
+      userDetails = jsonDecode(responseUser.body);
       username = userDetails["username"];
       setState(() {});
     } else {
