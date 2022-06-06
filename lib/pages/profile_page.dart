@@ -6,6 +6,8 @@ import 'package:flutter_assignment2/pages/my_offers_page.dart';
 import '../components/user.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import '../global_var.dart' as globals;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -17,12 +19,36 @@ class ProfilePage extends StatefulWidget {
 // this class shows the profile of the logged in user
 class _ProfilePage extends State<ProfilePage> {
   //Atributes
-  Map<String, dynamic> userDetails = {};
+  Map userDetails = {};
   List<Map<String, dynamic>> friends = [];
 
+  @override
+  void initState() {
+    getDataLoggedUser().then((value) {
+      print('Async done');
+    });
+    print(userDetails);
+    super.initState();
+  }
+
   _ProfilePage() {
-    userDetails = globals.users;
     friends = globals.friends;
+  }
+
+  // Call to the API to get the name of the logged in user
+  Future getDataLoggedUser() async {
+    final responseUser = await http
+        .get(Uri.parse('http://10.0.2.2:8000/user/'), headers: <String, String>{
+      'Authorization': 'Bearer ' + globals.accessToken,
+    });
+    print(responseUser.body);
+    if (responseUser.statusCode == 200) {
+      userDetails = jsonDecode(responseUser.body);
+      setState(() {});
+      print(userDetails);
+    } else {
+      throw Exception('Failed to get user.');
+    }
   }
 
   @override
@@ -100,13 +126,16 @@ class _ProfilePage extends State<ProfilePage> {
                   children: [
                     const Padding(
                         padding: EdgeInsets.only(top: 40)), //space from the top
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 100,
-                      backgroundImage: NetworkImage(userDetails["picture"]),
+                      backgroundImage:
+                          //NetworkImage(userDetails["picture"]),
+                          NetworkImage(
+                              "https://media1.popsugar-assets.com/files/thumbor/MjPiEL1c7rTUWc5qo-10Cr9DG74/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2014/11/24/864/n/1922441/8f8f3501b234abb6_FullSizeRender.jpg"),
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     Text(
-                      userDetails["name"], //name of user
+                      userDetails["username"], //name of user
                       style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -114,14 +143,15 @@ class _ProfilePage extends State<ProfilePage> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
+                      children: const [
+                        Icon(
                           FontAwesome.map_pin,
                           size: 15,
                         ),
                         Text(
-                          userDetails["location"], //location of user
-                          style: const TextStyle(
+                          'Deventer',
+                          //userDetails["location"], //location of user
+                          style: TextStyle(
                             fontSize: 18,
                           ),
                         ),
